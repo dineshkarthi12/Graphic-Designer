@@ -151,13 +151,13 @@ window.SITE = {
     },
     {
       id: "cr-04",
-      title: "[TODO: title, e.g. Investor pitch deck]",
+      title: "Orange Office — Company Pitch Deck",
       category: "decks",
       type: "image",
-      src: "", // [TODO]
+      src: "assets/work/creatives/orange-pitch-deck.webp",
       poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "16:9",
+      alt: "Overview of a 13-slide pitch deck for Orange Office Technologies in white and orange: cover “Smarter business through digital workflows”, about us, mission, services, industries served, why Orange Office, approach, success stories, key metrics, client logos, team, roadmap and contact slides.",
+      aspect: "3:2",
       featured: true
     },
     {
