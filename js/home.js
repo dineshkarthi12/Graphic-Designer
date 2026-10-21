@@ -160,7 +160,7 @@
         </div>
         <div class="reel__meta">
           <h4 class="reel__title">${esc(title)}</h4>
-          <span class="label">${esc(S.videoCategories[v.category] || "")}</span>
+          ${title !== S.videoCategories[v.category] ? `<span class="label">${esc(S.videoCategories[v.category] || "")}</span>` : ""}
         </div>
       </li>`;
   }
@@ -171,6 +171,7 @@
     $(".reels__grid--v").innerHTML = vertical.join("");
     $(".reels__grid--h").innerHTML = wide.join("");
     $(".reels__group--vertical").hidden = !vertical.length;
+    $(".reels__group--vertical .reels__title").textContent = `Reels & shorts · 9:16 · ${pad2(vertical.length)}${vertical.length > 3 ? " · scroll →" : ""}`;
     $(".reels__group--wide").hidden = !wide.length;
 
     if (showreel) {

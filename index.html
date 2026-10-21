@@ -35,14 +35,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=20261021">
+  <link rel="stylesheet" href="css/style.css?v=20261021b">
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script defer src="js/data.js?v=20261021"></script>
-  <script defer src="js/common.js?v=20261021"></script>
-  <script defer src="js/home.js?v=20261021"></script>
+  <script defer src="js/data.js?v=20261021b"></script>
+  <script defer src="js/common.js?v=20261021b"></script>
+  <script defer src="js/home.js?v=20261021b"></script>
 </head>
 <body data-page="home" data-root="">
 
@@ -139,7 +139,9 @@
         <div class="showreel" hidden></div>
         <div class="reels__group reels__group--vertical">
           <h3 class="label reels__title">Reels &amp; shorts · 9:16</h3>
-          <ul class="reels__grid reels__grid--v"></ul>
+          <div class="reels__rail" tabindex="0" role="region" aria-label="Reels, scroll sideways for more">
+            <ul class="reels__grid reels__grid--v"></ul>
+          </div>
         </div>
         <div class="reels__group reels__group--wide">
           <h3 class="label reels__title">Promo, demo &amp; motion · 16:9</h3>

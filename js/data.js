@@ -185,60 +185,120 @@ window.SITE = {
   videos: [
     {
       id: "vd-01",
-      title: "[TODO: title, e.g. Product teaser reel]",
+      title: "Reel 01", // [TODO: rename, e.g. Product teaser reel]
       category: "reel",
       type: "video",
-      src: "", // [TODO: assets/work/videos/reel-01.mp4, drive:FILE_ID or youtube:VIDEO_ID]
-      poster: "", // [TODO: assets/work/posters/reel-01.webp]
-      alt: "[TODO: one line on what the video shows]",
+      src: "drive:1VwRhAqvL7GHyc_uoZgW_NxQ30c47me2n",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-01.webp
+      alt: "[TODO: one line on what the reel shows]",
       aspect: "9:16"
     },
     {
       id: "vd-02",
-      title: "[TODO: title, e.g. Festival greeting short]",
+      title: "Reel 02", // [TODO: rename, e.g. Product teaser reel]
       category: "reel",
       type: "video",
-      src: "", // [TODO]
-      poster: "",
-      alt: "[TODO]",
+      src: "drive:1JtZDsha8e9S1FRvL7dz19rAIUWYjhBtc",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-02.webp
+      alt: "[TODO: one line on what the reel shows]",
       aspect: "9:16"
     },
     {
       id: "vd-03",
-      title: "[TODO: title, e.g. Feature walkthrough reel]",
+      title: "Reel 03", // [TODO: rename, e.g. Product teaser reel]
       category: "reel",
       type: "video",
-      src: "", // [TODO]
-      poster: "",
-      alt: "[TODO]",
+      src: "drive:1OcnXLK6k6LcWBziRJgx4VS1aesw7bOiJ",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-03.webp
+      alt: "[TODO: one line on what the reel shows]",
       aspect: "9:16"
     },
     {
       id: "vd-04",
-      title: "[TODO: title, e.g. Product demo video]",
-      category: "demo",
+      title: "Reel 04", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
       type: "video",
-      src: "", // [TODO]
-      poster: "",
-      alt: "[TODO]",
-      aspect: "16:9"
+      src: "drive:1wKrtuz9OeMeQaLUezLIk2fOypLtXGtQR",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-04.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
     },
     {
       id: "vd-05",
-      title: "[TODO: title, e.g. UI animation]",
-      category: "motion",
+      title: "Reel 05", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
       type: "video",
-      src: "", // [TODO]
+      src: "drive:12Lvv7e6Q2tqZl7JtELPk3r5P2p_3Unu2",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-05.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
+    },
+    {
+      id: "vd-06",
+      title: "Reel 06", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
+      type: "video",
+      src: "drive:1vN606mfZEeBCmituOPooSfPJD-Gf4o1R",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-06.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
+    },
+    {
+      id: "vd-07",
+      title: "Reel 07", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
+      type: "video",
+      src: "drive:1MGfrebkkcRByi6L9_UW7tEy0B42uEHrA",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-07.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
+    },
+    {
+      id: "vd-08",
+      title: "Reel 08", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
+      type: "video",
+      src: "drive:1lnk0PEgEzYWm9zMWON7Upj17_F6pcq9o",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-08.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
+    },
+    {
+      id: "vd-09",
+      title: "Reel 09", // [TODO: rename, e.g. Product teaser reel]
+      category: "reel",
+      type: "video",
+      src: "drive:1v09nDtDS8oSJac1Ui5DmXw5iAwQncV-u",
+      poster: "", // empty = Drive's own thumbnail; or assets/work/posters/reel-09.webp
+      alt: "[TODO: one line on what the reel shows]",
+      aspect: "9:16"
+    },
+    {
+      id: "vd-10",
+      title: "[TODO: title, e.g. Product demo video]",
+      category: "demo",
+      type: "video",
+      src: "", // [TODO: assets/work/videos/demo-01.mp4, drive:FILE_ID or youtube:VIDEO_ID]
       poster: "",
       alt: "[TODO]",
       aspect: "16:9"
     },
     {
-      id: "vd-06",
+      id: "vd-11",
+      title: "[TODO: title, e.g. UI animation]",
+      category: "motion",
+      type: "video",
+      src: "", // [TODO: assets/work/videos/motion-01.mp4, drive:FILE_ID or youtube:VIDEO_ID]
+      poster: "",
+      alt: "[TODO]",
+      aspect: "16:9"
+    },
+    {
+      id: "vd-12",
       title: "[TODO: title, e.g. Promo ad]",
       category: "promo",
       type: "video",
-      src: "", // [TODO]
+      src: "", // [TODO: assets/work/videos/promo-01.mp4, drive:FILE_ID or youtube:VIDEO_ID]
       poster: "",
       alt: "[TODO]",
       aspect: "16:9"
@@ -421,7 +481,7 @@ window.SITE = {
       },
       brief: ["[TODO]"],
       approach: ["[TODO]"],
-      media: ["vd-04", "vd-05"],
+      media: ["vd-10", "vd-11"],
       results: [],
       learned: ["[TODO]"]
     }
