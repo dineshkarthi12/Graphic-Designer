@@ -162,13 +162,13 @@ window.SITE = {
     },
     {
       id: "cr-05",
-      title: "[TODO: title, e.g. Icon set]",
+      title: "Orange Office — Icon & Illustration Set",
       category: "illustration",
       type: "image",
-      src: "", // [TODO]
+      src: "assets/work/creatives/orange-icons-illustrations.webp",
       poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "1:1",
+      alt: "Icon and illustration system for Orange Office Technologies in black and orange: twenty service icons such as workflow automation, cloud solutions, cybersecurity and analytics, and flat illustrations of people and a robot showing team collaboration, process automation, data and analytics, cloud solutions, security, global reach and support.",
+      aspect: "3:2",
       featured: true
     }
 
