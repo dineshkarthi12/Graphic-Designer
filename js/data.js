@@ -90,7 +90,7 @@ window.SITE = {
    * Show a labelled placeholder for entries that have no `src` yet.
    * Set to false once your real files are in, so empty entries are hidden.
    */
-  showPlaceholders: true,
+  showPlaceholders: false,
 
   /*
    * Creatives (images). Order here is the order in the gallery.
