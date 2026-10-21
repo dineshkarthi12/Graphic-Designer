@@ -129,13 +129,13 @@ window.SITE = {
     },
     {
       id: "cr-02",
-      title: "[TODO: title, e.g. Logo and identity]",
+      title: "Proklean — Brand Identity",
       category: "branding",
       type: "image",
-      src: "", // [TODO]
+      src: "assets/work/creatives/proklean-brand-identity.webp",
       poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "1:1",
+      alt: "Brand identity board for Proklean, an eco-friendly cleaning brand from Chennai: a green leaf-and-P logo with the line “Cleaner spaces, greener tomorrow”, the logo concept (leaf, letter P and droplet), a four-colour green palette, Montserrat typography, the logo on a building sign, product bottles, and applications for homes, workplaces and industries.",
+      aspect: "3:2",
       featured: true
     },
     {
