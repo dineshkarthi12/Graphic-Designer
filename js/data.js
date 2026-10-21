@@ -140,13 +140,13 @@ window.SITE = {
     },
     {
       id: "cr-03",
-      title: "[TODO: title, e.g. Display ad set]",
+      title: "Orange Office — Ad & Banner Set",
       category: "ads",
       type: "image",
-      src: "", // [TODO]
+      src: "assets/work/creatives/orange-ad-banner-set.webp",
       poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "1200:628",
+      alt: "A set of ads and banners for Orange Office Technologies in white and orange: a website hero banner “Simpler processes. Stronger businesses.”, a LinkedIn banner “People. Process. Technology. Progress.”, an Instagram post, a social media ad, a Google display ad and a vertical ad, each with the logo, a bold headline and an orange call-to-action button.",
+      aspect: "3:2",
       featured: true
     },
     {
