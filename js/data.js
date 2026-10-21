@@ -107,13 +107,24 @@ window.SITE = {
   creatives: [
     {
       id: "cr-01",
-      title: "[TODO: title, e.g. Product launch post]",
+      title: "Work Smarter, Not Harder",
       category: "social",
       type: "image",
-      src: "", // [TODO: assets/work/creatives/social-01.webp or drive:FILE_ID]
+      src: "assets/work/creatives/orange-work-smarter.webp",
       poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "4:5",
+      alt: "Square social post for Orange Office Technologies: the headline “Work smarter. Not harder.” in bold black and orange, three service icons for workflow automation, business process solutions and digital transformation, an orange call-to-action button, and a man working on a laptop.",
+      aspect: "1:1",
+      featured: true
+    },
+    {
+      id: "cr-06",
+      title: "From Complexity to Clarity",
+      category: "social",
+      type: "image",
+      src: "assets/work/creatives/orange-complexity-to-clarity.webp",
+      poster: "",
+      alt: "Square social post for Orange Office Technologies: the headline “From complexity to clarity.” over a bright office with the orange logo on a glass wall, three service columns with short descriptions, and an orange “Let’s simplify your business” button.",
+      aspect: "1:1",
       featured: true
     },
     {
@@ -159,18 +170,8 @@ window.SITE = {
       alt: "[TODO: describe the image]",
       aspect: "1:1",
       featured: true
-    },
-    {
-      id: "cr-06",
-      title: "[TODO: title, e.g. Festival campaign story]",
-      category: "social",
-      type: "image",
-      src: "", // [TODO]
-      poster: "",
-      alt: "[TODO: describe the image]",
-      aspect: "9:16",
-      featured: true
     }
+
   ],
 
   /*
