@@ -1,300 +1,61 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dinesh Kumar — Graphic Designer &amp; Video Editor, Chennai</title>
-  <meta name="description" content="Dinesh Kumar is a Graphic Designer and Video Editor in Chennai with 7+ years in design: 300+ marketing creatives and 50+ reels, promo, demo and motion videos.">
-  <meta name="theme-color" content="#1B2730">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Dinesh Kumar · AI/ML Engineer</title>
+    <meta name="description" content="AI/ML engineer with 7+ years building B2B SaaS. ML models and LLM-powered features for HR-tech, recruitment, fintech and healthcare." />
+    <meta name="author" content="Dinesh Kumar" />
+    <meta name="theme-color" content="#F5F5F7" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href="https://graphic-designer-portfolio-ruddy.vercel.app/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-  <!-- Once the site has its final address, make og:url and the two image URLs absolute
-       (e.g. https://your-site.vercel.app/assets/og-image.jpg) so LinkedIn and WhatsApp show the preview. -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Dinesh Kumar">
-  <meta property="og:title" content="Dinesh Kumar — Graphic Designer & Video Editor, Chennai">
-  <meta property="og:description" content="Brand, social and motion content that reads at a glance and stays on-brand. 300+ creatives, 50+ reels and videos.">
-  <meta property="og:url" content="/">
-  <meta property="og:image" content="assets/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Dinesh Kumar, Graphic Designer and Video Editor, Chennai.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Dinesh Kumar — Graphic Designer & Video Editor, Chennai">
-  <meta name="twitter:description" content="Brand, social and motion content that reads at a glance and stays on-brand.">
-  <meta name="twitter:image" content="assets/og-image.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dinesh Kumar · AI/ML Engineer" />
+    <meta property="og:title" content="Dinesh Kumar · AI/ML Engineer" />
+    <meta property="og:description" content="AI/ML engineer with 7+ years building B2B SaaS. ML models and LLM-powered features for HR-tech, recruitment, fintech and healthcare." />
+    <meta property="og:url" content="https://graphic-designer-portfolio-ruddy.vercel.app/" />
+    <meta property="og:image" content="https://graphic-designer-portfolio-ruddy.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dinesh Kumar · AI/ML Engineer" />
+    <meta name="twitter:description" content="AI/ML engineer with 7+ years building B2B SaaS. ML models and LLM-powered features for HR-tech, recruitment, fintech and healthcare." />
+    <meta name="twitter:image" content="https://graphic-designer-portfolio-ruddy.vercel.app/og-image.png" />
 
-  <script>
-    /* Decide motion vs still before first paint. */
-    document.documentElement.classList.add(matchMedia("(prefers-reduced-motion: reduce)").matches ? "static" : "motion");
-    /* Coming from another page: keep the transition panel covering until it slides away. */
-    try{if(sessionStorage.getItem("dk-pt")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("pt-in")}catch(e){}
-  </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=20261021c">
-
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script defer src="js/data.js?v=20261021c"></script>
-  <script defer src="js/common.js?v=20261021c"></script>
-  <script defer src="js/home.js?v=20261021c"></script>
-</head>
-<body data-page="home" data-root="">
-
-  <main id="main">
-
-    <!-- 1. Hero: showreel loop, or a wall of artboards built from the featured creatives -->
-    <section class="hero" id="top" aria-label="Introduction">
-      <div class="hero__stage">
-        <div class="hero__wall" aria-hidden="true"></div>
-        <div class="hero__shade hero__shade--top" aria-hidden="true"></div>
-        <div class="hero__shade hero__shade--bottom" aria-hidden="true"></div>
-
-        <div class="hero__block hero__block--1">
-          <div class="wrap">
-            <p class="mono hero__label" data-bind="hero.label">Graphic Designer &amp; Video Editor · Chennai</p>
-            <h1 class="display hero__name"><span class="hero__name-line" data-bind="person.name">Dinesh Kumar</span><span class="sr-only">, Graphic Designer and Video Editor</span></h1>
-            <p class="hero__line" data-bind="hero.line">I make brand, social and motion content that reads at a glance and stays on-brand.</p>
-            <div class="hero__ctas">
-              <a class="btn btn--solid" href="#creatives">View work <svg class="icon arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M10 3v13M5 11l5 5 5-5"/></svg></a>
-              <a class="btn js-resume" href="#" target="_blank" rel="noopener">Download resume<span class="sr-only"> (opens in a new tab)</span></a>
-              <button class="btn btn--ghost js-showreel" type="button" hidden><span class="btn__play" aria-hidden="true"></span>Play showreel</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero__caption mono" aria-hidden="true">
-          <span data-bind="person.coords"></span>
-          <span class="hero__frame">Art. 01</span>
-        </div>
-        <div class="hero__scroll mono" aria-hidden="true"><span>Scroll</span><i></i></div>
-      </div>
-    </section>
-
-    <!-- 2. Stats & about -->
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-01</span>
-            <span class="label">In numbers</span>
-            <span class="label" data-bind="person.coords"></span>
-          </div>
-          <h2 class="h2 reveal" id="about-title" data-bind="about.statement">Seven years. Three hundred creatives. Fifty reels and videos.</h2>
-        </header>
-        <ul class="stats"></ul>
-        <div class="grid about__grid">
-          <div class="about__story lead-body"></div>
-          <div class="about__spec">
-            <dl class="spec"></dl>
-            <p class="label spec__caption">Spec. sheet · Rev. 2026</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Selected creatives -->
-    <section class="section creatives" id="creatives" aria-labelledby="creatives-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-02</span>
-            <span class="label">Selected creatives</span>
-            <span class="label">From 300+ · 2019–2026</span>
-          </div>
-          <div class="creatives__head">
-            <h2 class="h2 reveal" id="creatives-title">Made to be seen in a scroll.</h2>
-            <p class="reveal">Social posts, logos, ads, decks and illustrations. Pick a type, then open any piece full size.</p>
-          </div>
-        </header>
-        <div class="chips" role="group" aria-label="Filter creatives by type"></div>
-        <p class="sr-only" aria-live="polite" id="gallery-status"></p>
-        <ul class="gallery" id="gallery"></ul>
-        <p class="gallery__empty label" hidden>Nothing in this category yet.</p>
-        <div class="gallery__more">
-          <a class="btn js-drive" href="#" target="_blank" rel="noopener">See the full archive on Google Drive<span class="sr-only"> (opens in a new tab)</span> <svg class="icon arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Reels & motion -->
-    <section class="section reels on-dark" id="reels" aria-labelledby="reels-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-03</span>
-            <span class="label">Reels &amp; motion</span>
-            <span class="label">From 50+ videos</span>
-          </div>
-          <div class="creatives__head">
-            <h2 class="h2 reveal" id="reels-title">Cut for the first three seconds.</h2>
-            <p class="reveal">Reels and shorts, promo and ad videos, product demos and motion graphics. Nothing plays until you press play.</p>
-          </div>
-        </header>
-        <div class="showreel" hidden></div>
-        <div class="reels__group reels__group--vertical">
-          <h3 class="label reels__title">Reels &amp; shorts · 9:16</h3>
-          <div class="reels__rail" tabindex="0" role="region" aria-label="Reels, scroll sideways for more">
-            <ul class="reels__grid reels__grid--v"></ul>
-          </div>
-        </div>
-        <div class="reels__group reels__group--wide">
-          <h3 class="label reels__title">Promo, demo &amp; motion · 16:9</h3>
-          <ul class="reels__grid reels__grid--h"></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Services -->
-    <section class="section services" id="services" aria-labelledby="services-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-04</span>
-            <span class="label">What I do</span>
-            <span class="label">Six disciplines · one hand</span>
-          </div>
-          <h2 class="h2 reveal" id="services-title">Static, motion and everything between.</h2>
-        </header>
-        <ul class="services__grid"></ul>
-      </div>
-    </section>
-
-    <!-- 6. Process -->
-    <section class="section process on-dark" id="process" aria-labelledby="process-title">
-      <div class="process__pin">
-        <div class="wrap">
-          <header class="sheet" style="margin-bottom:0">
-            <div class="sheet__meta">
-              <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-05</span>
-              <span class="label">Process</span>
-              <span class="label">Six steps · left to right</span>
-            </div>
-            <div class="process__head">
-              <h2 class="h2 reveal" id="process-title">From brief to every export size.</h2>
-              <p class="reveal">The same six steps for a single post or a full campaign.</p>
-            </div>
-          </header>
-        </div>
-        <div class="process__viewport" tabindex="0" role="region" aria-label="Process steps, scrollable">
-          <ol class="process__track"></ol>
-        </div>
-        <div class="wrap">
-          <div class="process__foot mono" aria-hidden="true">
-            <span class="process__count">01 / 06</span>
-            <span class="process__bar"><span></span></span>
-            <span class="label"><span class="process__hint--desk">Scroll</span><span class="process__hint--touch">Swipe</span> →</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Experience -->
-    <section class="section experience" id="experience" aria-labelledby="exp-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-06</span>
-            <span class="label">Experience</span>
-            <span class="label">Mar 2019 – Present</span>
-          </div>
-          <h2 class="h2 reveal" id="exp-title">Two companies, seven years.</h2>
-        </header>
-        <div class="grid">
-          <div class="timeline">
-            <div class="timeline__rail" aria-hidden="true"><div class="timeline__line"></div></div>
-            <ol class="timeline__roles"></ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. Toolkit -->
-    <section class="section toolkit" id="toolkit" aria-labelledby="tool-title">
-      <div class="wrap">
-        <header class="sheet">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-07</span>
-            <span class="label">Toolkit</span>
-            <span class="label">Schedule of tools</span>
-          </div>
-          <h2 class="h2 reveal" id="tool-title">What I work with.</h2>
-        </header>
-        <div class="grid">
-          <ul class="toolkit__list"></ul>
-          <div class="creds">
-            <div class="creds__col--certs">
-              <h3 class="label">Also a UI/UX designer</h3>
-              <p class="creds__ux">Product interfaces, Figma design systems and accessible UI are in a separate portfolio.</p>
-              <a class="btn js-ux" href="#" target="_blank" rel="noopener">View UX portfolio<span class="sr-only"> (opens in a new tab)</span> <svg class="icon arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></a>
-            </div>
-            <div class="creds__col--edu">
-              <h3 class="label">Education</h3>
-              <div class="creds__edu"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. Contact -->
-    <section class="section contact on-dark" id="contact" aria-labelledby="contact-title">
-      <div class="wrap">
-        <header class="sheet" style="margin-bottom:0">
-          <div class="sheet__meta">
-            <span class="mono sheet__no"><i class="sheet__tick" aria-hidden="true"></i>Sheet A-08</span>
-            <span class="label">Contact</span>
-            <span class="label">Chennai · IST (UTC+5:30)</span>
-          </div>
-          <h2 class="display contact__title reveal" id="contact-title" data-bind="contact.title"></h2>
-          <p class="lead contact__line reveal" data-bind="contact.line"></p>
-          <p class="contact__clock reveal"><span class="contact__dot" aria-hidden="true"></span><span>Local time in Chennai</span><time class="contact__time">--:--</time><span class="contact__tz">IST · UTC+5:30</span></p>
-        </header>
-        <ul class="contact__rows"></ul>
-      </div>
-    </section>
-  </main>
-
-  <!-- Creative viewer -->
-  <dialog class="lightbox lightbox--gallery" aria-labelledby="lb-title">
-    <div class="lightbox__bar">
-      <h2 class="lightbox__title" id="lb-title">Creative</h2>
-      <span class="label lightbox__cat"></span>
-      <button class="lightbox__close" type="button" aria-label="Close viewer">
-        <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"/></svg>
-      </button>
-    </div>
-    <div class="lightbox__panel" id="lb-panel" tabindex="-1"></div>
-    <div class="lightbox__foot">
-      <button class="lightbox__nav" type="button" data-step="-1" aria-label="Previous creative"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M17 10H4M9 5l-5 5 5 5"/></svg></button>
-      <span class="label lightbox__count" aria-live="polite"></span>
-      <span class="label lightbox__hint">← → browse · Esc closes</span>
-      <button class="lightbox__nav" type="button" data-step="1" aria-label="Next creative"><svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg></button>
-    </div>
-  </dialog>
-
-  <!-- Showreel player -->
-  <dialog class="lightbox lightbox--video" aria-labelledby="sr-title">
-    <div class="lightbox__bar">
-      <h2 class="lightbox__title" id="sr-title">Showreel</h2>
-      <button class="lightbox__close" type="button" aria-label="Close showreel" style="margin-left:auto">
-        <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16"/></svg>
-      </button>
-    </div>
-    <div class="lightbox__player"></div>
-  </dialog>
-
-  <noscript>
-    <div class="noscript">
-      <h1 class="display" style="font-size:3rem">Dinesh Kumar</h1>
-      <p>Graphic Designer &amp; Video Editor in Chennai. This site needs JavaScript to show the work.</p>
-      <p><a href="mailto:dineshkumarsn33@gmail.com">dineshkumarsn33@gmail.com</a> · <a href="tel:+919952129182">+91 99521 29182</a> · <a href="https://www.linkedin.com/in/dinesh-karthi-9224ba205" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://drive.google.com/file/d/1-mWyjqvFvRbcq3GU1MOPolDng5ZytK2K/view?usp=drivesdk" target="_blank" rel="noopener">Resume</a> · <a href="https://drive.google.com/drive/folders/142cz54l6UC17Xxu7qpe_2_wKrU2q_pxG" target="_blank" rel="noopener">Work on Google Drive</a></p>
-    </div>
-  </noscript>
-</body>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dinesh Kumar",
+        "jobTitle": "AI/ML Engineer",
+        "email": "mailto:dineshkumarsn33@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressCountry": "IN" },
+        "url": "https://graphic-designer-portfolio-ruddy.vercel.app/",
+        "sameAs": ["https://www.linkedin.com/in/dinesh-karthi-9224ba205", "https://github.com/dineshkarthi12"]
+      }
+    </script>
+    <style>
+      html, body { background: #F5F5F7; color: #0B0B12; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <main style="font-family: system-ui, sans-serif; max-width: 640px; margin: 64px auto; padding: 0 20px; line-height: 1.6">
+        <h1>Dinesh Kumar, AI/ML Engineer</h1>
+        <p>I turn machine learning and LLMs into reliable, easy-to-use product features for B2B SaaS teams in HR-tech, recruitment, fintech and healthcare.</p>
+        <p>
+          <a href="mailto:dineshkumarsn33@gmail.com">Email</a> ·
+          <a href="https://www.linkedin.com/in/dinesh-karthi-9224ba205">LinkedIn</a> ·
+          <a href="https://github.com/dineshkarthi12">GitHub</a> ·
+          <a href="/resume.pdf">Resume (PDF)</a>
+        </p>
+      </main>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
