@@ -145,8 +145,9 @@ function CaseStudyBody({ p, next }: { p: Project; next: Project }) {
       </Section>
 
       {p.ai.kind === 'deep-dive' ? (
-        <Section num={num()} title="AI/ML deep dive" id="ml" lead={p.ai.intro}>
+        <Section num={num()} title={p.ai.title} id="ml" lead={p.ai.intro}>
           <DeepDive p={p} />
+          <p className="ai-principle">{aiDesignPrinciple}</p>
         </Section>
       ) : (
         <Section num={num()} title="The AI features" id="ai" lead={p.ai.intro}>
@@ -439,8 +440,8 @@ function DeepDive({ p }: { p: Project }) {
   if (p.ai.kind !== 'deep-dive') return null;
   const ai = p.ai;
   const blocks = [
-    { id: 'data', title: 'Data', icon: 'database' as const, text: ai.data.text, facts: ai.data.facts },
-    { id: 'model', title: 'Model & approach', icon: 'brain' as const, text: ai.model.text, facts: ai.model.facts },
+    { id: 'data', title: ai.data.title ?? 'Data', icon: 'database' as const, text: ai.data.text, facts: ai.data.facts },
+    { id: 'model', title: ai.model.title ?? 'Model & approach', icon: 'brain' as const, text: ai.model.text, facts: ai.model.facts },
   ];
   return (
     <div className="ml">
@@ -464,25 +465,31 @@ function DeepDive({ p }: { p: Project }) {
         <span className="feature-icon">
           <Icon name="gauge" />
         </span>
-        <h3 className="ml-h3">Evaluation</h3>
+        <h3 className="ml-h3">{ai.evaluation.title ?? 'Evaluation'}</h3>
         <p>{ai.evaluation.text}</p>
         <Facts facts={ai.evaluation.facts} />
-        <ConfusionMatrix labels={ai.evaluation.confusion.labels} matrix={ai.evaluation.confusion.matrix} accent={p.accent} />
-        <ul className="ml-reading">
-          {ai.evaluation.reading.map((r) => (
-            <li key={r}>{r}</li>
-          ))}
-        </ul>
-        <figure className="ml-curves">
-          <ZoomImage src={ai.evaluation.curvesImage} alt={ai.evaluation.curvesAlt} width={714} height={318} />
-          <figcaption>{ai.evaluation.curvesNote}</figcaption>
-        </figure>
+        {ai.evaluation.confusion && (
+          <ConfusionMatrix labels={ai.evaluation.confusion.labels} matrix={ai.evaluation.confusion.matrix} accent={p.accent} />
+        )}
+        {ai.evaluation.reading && (
+          <ul className="ml-reading">
+            {ai.evaluation.reading.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+        )}
+        {ai.evaluation.curvesImage && (
+          <figure className="ml-curves">
+            <ZoomImage src={ai.evaluation.curvesImage} alt={ai.evaluation.curvesAlt ?? ''} width={714} height={318} />
+            {ai.evaluation.curvesNote && <figcaption>{ai.evaluation.curvesNote}</figcaption>}
+          </figure>
+        )}
       </Reveal>
       <Reveal className="ml-block glass">
         <span className="feature-icon">
           <Icon name="server" />
         </span>
-        <h3 className="ml-h3">Serving & integration</h3>
+        <h3 className="ml-h3">{ai.serving.title ?? 'Serving & integration'}</h3>
         <p>{ai.serving.text}</p>
         <Facts facts={ai.serving.facts} />
       </Reveal>

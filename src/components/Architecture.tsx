@@ -7,7 +7,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export function Architecture({ a, accent }: { a: MlDeepDive['architecture']; accent: string }) {
   const n = a.nodes.length;
   const W = 1000;
-  const boxW = 156;
+  const boxW = n > 5 ? 146 : 156;
   const gap = (W - n * boxW) / (n - 1);
   const x = (i: number) => i * (boxW + gap);
   const desc = `${a.title}: ${a.nodes.map((nd) => `${nd.title} (${nd.sub})`).join(', then ')}. ${a.loop} flows back to the data.`;
@@ -59,7 +59,7 @@ export function Architecture({ a, accent }: { a: MlDeepDive['architecture']; acc
             <text x={x(i) + boxW / 2} y="56" textAnchor="middle" className="arch-title">
               {nd.title}
             </text>
-            <text x={x(i) + boxW / 2} y="80" textAnchor="middle" className="arch-sub">
+            <text x={x(i) + boxW / 2} y="80" textAnchor="middle" className={n > 5 ? 'arch-sub arch-sub-sm' : 'arch-sub'}>
               {nd.sub}
             </text>
           </motion.g>

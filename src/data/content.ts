@@ -31,22 +31,25 @@ export type Feature = { icon: IconName; title: string; text: string };
 export type Fact = { label: string; value: string };
 export type Decision = { title: string; why: string; notChosen: string };
 
+/** One block of the deep dive. `title` overrides the default heading (Data, Model & approach, …). */
+export type DiveBlock = { title?: string; text: string; facts: Fact[] };
+
 export type MlDeepDive = {
   kind: 'deep-dive';
+  /** Section heading, e.g. "AI/ML deep dive". */
+  title: string;
   intro: string;
-  data: { text: string; facts: Fact[] };
-  model: { text: string; facts: Fact[] };
-  evaluation: {
-    text: string;
-    facts: Fact[];
+  data: DiveBlock;
+  model: DiveBlock;
+  evaluation: DiveBlock & {
     /** Rows = actual class, columns = predicted class. */
-    confusion: { labels: string[]; matrix: number[][] };
-    curvesImage: string;
-    curvesAlt: string;
-    curvesNote: string;
-    reading: string[];
+    confusion?: { labels: string[]; matrix: number[][] };
+    curvesImage?: string;
+    curvesAlt?: string;
+    curvesNote?: string;
+    reading?: string[];
   };
-  serving: { text: string; facts: Fact[] };
+  serving: DiveBlock;
   architecture: { title: string; caption: string; nodes: { title: string; sub: string }[]; loop: string };
 };
 
@@ -60,7 +63,7 @@ export type Project = {
   slug: string;
   name: string;
   category: string;
-  /** Accent colours sampled from the project's own images. */
+  /** Accent colours sampled from the project's own images (darkened where needed for 4.5:1 text contrast). */
   accent: string;
   accent2: string;
   cover: string;
@@ -105,9 +108,9 @@ export const person = {
   resumeHeadline: 'AI/ML Engineer | Generative AI & LLM Applications | Machine Learning | AI Product Engineering',
   /** What I do and for whom. Condensed from the resume summary. */
   headline:
-    'I turn machine learning and LLMs into reliable, easy-to-use product features for B2B SaaS teams in HR-tech, recruitment, fintech and healthcare.',
+    'I build machine learning and LLM-powered features that ship: from data and models to APIs inside B2B SaaS products for HR-tech, recruitment, fintech and healthcare.',
   valueProp:
-    '7+ years building B2B SaaS. Now building ML models and LLM-powered applications, from data preparation to deployment.',
+    '7+ years in B2B SaaS. AI features delivered across 6 products: NLP job matching, people analytics, transaction classification, anomaly alerts and symptom-based recommendations.',
   availability: 'Open to opportunities',
   location: 'Chennai, India',
 };
@@ -127,7 +130,7 @@ export const contact = {
 // ───────────────────────────────────────────── home page
 
 export const impactAtAGlance: (Metric & { source: string })[] = [
-  { value: '60%', label: 'Reduced hiring time', source: 'Monkify AI' },
+  { value: '60%', label: 'Reduced hiring time', source: 'Monkify AI · NLP matching' },
   { value: '−70%', label: 'Payment failures', source: 'Veyro · Aura' },
   { value: '+65%', label: 'Appointment bookings', source: 'NovaCare' },
   { value: '96%', label: 'Payment success, up from 78%', source: 'Aura' },
@@ -137,15 +140,15 @@ export const about = {
   eyebrow: 'About',
   title: 'Models are only useful when people can use them.',
   bio: [
-    "I'm an AI/ML engineer with 7+ years of experience building B2B SaaS products for HR-tech, recruitment, fintech and healthcare.",
+    "I'm an AI/ML engineer with 7+ years of experience building B2B SaaS products for HR-tech, recruitment, fintech and healthcare, now focused on machine learning and generative AI.",
     'I build LLM-powered applications with Python, LangChain, RAG pipelines and vector databases, and machine learning models with scikit-learn, XGBoost and PyTorch, from data preparation and model evaluation to deployment with FastAPI, Docker and Streamlit.',
-    'My front-end, data-visualisation and UX background helps me turn models into reliable, easy-to-use product features.',
+    "I've delivered AI features across 6 products, including NLP-based job matching (Monkify AI), people analytics (Loyaltri), transaction classification and anomaly alerts (Veyro, Aura) and symptom-based recommendations (NovaCare). My front-end and data-visualisation background helps me turn models into reliable, easy-to-use features.",
   ],
   stats: [
     { value: '7+', label: 'Years of experience' },
-    { value: '6', label: 'SaaS products led at Orange Office' },
-    { value: '35%', label: 'Fewer visual inconsistencies from my design system' },
-    { value: '5', label: 'Junior designers mentored' },
+    { value: '6', label: 'Products with AI/ML features delivered' },
+    { value: '25%', label: 'Higher appointment completion (Auvia)' },
+    { value: '5', label: 'Junior team members mentored' },
   ] as Metric[],
 };
 
@@ -167,23 +170,16 @@ export const skills: SkillGroup[] = [
       {
         name: 'Machine learning',
         items: [
-          'Supervised and unsupervised learning', 'Regression', 'Classification', 'Clustering',
-          'Feature engineering', 'Model evaluation (precision, recall, F1, ROC-AUC)', 'Cross-validation',
-          'Hyperparameter tuning', 'scikit-learn', 'XGBoost', 'SHAP',
+          'Regression', 'Classification', 'Clustering', 'Anomaly detection', 'Feature engineering',
+          'Model evaluation (precision, recall, F1, ROC-AUC)', 'Cross-validation', 'Hyperparameter tuning',
+          'scikit-learn', 'XGBoost', 'SHAP',
         ],
       },
       {
-        name: 'Deep learning',
+        name: 'Deep learning & computer vision',
         items: [
-          'PyTorch', 'TensorFlow', 'Keras', 'Neural networks', 'CNNs', 'RNNs/LSTMs', 'Transformers',
-          'Transfer learning', 'Fine-tuning',
-        ],
-      },
-      {
-        name: 'Computer vision',
-        items: [
-          'OpenCV', 'Image classification', 'Object detection (YOLO)', 'OCR', 'Stable Diffusion',
-          'Hugging Face Diffusers', 'Adobe Firefly',
+          'PyTorch', 'TensorFlow', 'Keras', 'CNNs', 'RNNs/LSTMs', 'Transformers', 'Transfer learning', 'Fine-tuning',
+          'OpenCV', 'YOLO', 'OCR', 'Stable Diffusion',
         ],
       },
     ],
@@ -196,33 +192,31 @@ export const skills: SkillGroup[] = [
       {
         name: 'Generative AI & LLMs',
         items: [
-          'OpenAI GPT', 'Claude', 'Gemini', 'Llama', 'Hugging Face Transformers', 'LangChain', 'LlamaIndex',
-          'Retrieval-Augmented Generation (RAG)', 'Prompt engineering', 'Embeddings', 'AI agents',
-          'Tool calling', 'LoRA/PEFT fine-tuning', 'LLM evaluation',
+          'OpenAI GPT', 'Claude', 'Gemini', 'Llama', 'Hugging Face', 'LangChain', 'LlamaIndex', 'RAG',
+          'Prompt engineering', 'Embeddings', 'AI agents', 'Tool calling', 'LoRA/PEFT', 'LLM evaluation',
         ],
       },
       {
         name: 'NLP',
         items: [
-          'Text classification', 'Named entity recognition', 'Sentiment analysis', 'Semantic search',
-          'Resume parsing', 'Job matching', 'Sentence-Transformers', 'spaCy', 'NLTK',
+          'Text classification', 'NER', 'Sentiment analysis', 'Semantic search', 'Resume parsing', 'Job matching',
+          'Sentence-Transformers', 'spaCy', 'NLTK',
         ],
       },
     ],
   },
   {
     id: 'data',
-    title: 'Data & Vector Stores',
+    title: 'Data & Databases',
     short: 'Data',
     groups: [
       {
-        name: 'Data & analytics',
+        name: 'Data & databases',
         items: [
-          'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Plotly', 'Power BI', 'Jupyter',
-          'Exploratory data analysis', 'Data cleaning', 'Data visualisation', 'Dashboards',
+          'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Plotly', 'Power BI', 'Jupyter', 'EDA', 'PostgreSQL', 'MySQL',
+          'MongoDB', 'Pinecone', 'ChromaDB', 'FAISS',
         ],
       },
-      { name: 'Databases & vector stores', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Pinecone', 'ChromaDB', 'FAISS'] },
     ],
   },
   {
@@ -234,29 +228,25 @@ export const skills: SkillGroup[] = [
         name: 'MLOps & deployment',
         items: [
           'FastAPI', 'Flask', 'REST APIs', 'Streamlit', 'Gradio', 'Docker', 'Git', 'GitHub Actions', 'MLflow',
-          'AWS (SageMaker, EC2, S3)', 'Azure OpenAI', 'Google Cloud Vertex AI',
+          'AWS (SageMaker, EC2, S3)', 'Azure OpenAI', 'Vertex AI',
         ],
       },
     ],
   },
   {
     id: 'product',
-    title: 'AI Product & UX',
-    short: 'Product / UI',
+    title: 'AI Product & Collaboration',
+    short: 'AI Product',
     groups: [
       {
-        name: 'AI product & UX',
+        name: 'AI product & collaboration',
         items: [
-          'AI feature design', 'Human-in-the-loop workflows', 'Figma', 'Figma AI', 'Figma Make', 'Prototyping',
-          'Design systems', 'WCAG 2.1 AA accessibility',
+          'Human-in-the-loop workflows', 'Confidence and fallback handling', 'Prototyping', 'Figma', 'Agile/Scrum',
+          'Jira', 'Stakeholder presentations', 'Mentoring',
         ],
       },
     ],
   },
-];
-
-export const collaboration = [
-  'Agile/Scrum', 'Jira', 'Cross-functional product and engineering teams', 'Stakeholder presentations', 'Mentoring',
 ];
 
 export type Role = {
@@ -271,31 +261,36 @@ export type Role = {
 
 export const experience: Role[] = [
   {
-    title: 'Senior UI/UX & Product Designer',
+    title: 'AI/ML Product Engineer',
     company: 'Orange Office Technologies',
     location: 'Chennai',
     period: 'Sep 2020 – Present',
     impact: [
-      'Led product and AI feature design for 6 SaaS products across HR-tech, recruitment, fintech and healthcare, in Agile/Scrum sprints with engineering and product teams.',
-      'Built a Figma design system with reusable components and design tokens, reducing visual inconsistencies by 35%.',
-      "Simplified Auvia's healthcare appointment booking flow, increasing appointment completion by 25%.",
+      'Delivered AI/ML features for 6 SaaS products across HR-tech, recruitment, fintech and healthcare, working with engineering and product teams in 2-week Agile/Scrum sprints from requirement to release.',
+      "Built Monkify AI's candidate-to-job matching: parsing resumes into structured skills, experience and role data, embedding candidates and job descriptions, and ranking matches with semantic search.",
+      'Translated business problems into ML tasks (ranking, recommendation, classification, anomaly detection) and defined success criteria for each feature with product owners and engineering leads.',
     ],
     more: [
-      'Designed AI feature experiences: prompt inputs, model output display, confidence and fallback states, and human-in-the-loop review flows.',
-      'Built AI-assisted workflows with Claude, Adobe Firefly, Figma AI and Figma Make, using prompt engineering for faster concepting and prototyping.',
-      'Produced 50+ product demo and explainer videos and 300+ launch assets; mentored 5 junior designers and presented to clients and leadership.',
+      'People analytics (Loyaltri): dashboards that turn attendance, leave and payroll data into trends such as absenteeism, overtime and headcount movement.',
+      'Fintech ML (Veyro, Aura): automatic transaction categorisation (multi-class classification on merchant and transaction text) and unusual-transaction alerts (anomaly detection on spending patterns).',
+      'Healthcare AI (NovaCare, Auvia): symptom-based doctor recommendations, smart appointment slot suggestions and health-metric trend analytics; simplified the appointment booking flow, increasing appointment completion by 25%.',
+      'Worked with backend and data engineers on data preparation and feature definitions, and integrated model outputs into web and mobile apps through REST APIs.',
+      'Designed LLM feature experiences end to end: prompt inputs, model output display, confidence scores, fallback states for low-confidence results and human-in-the-loop review.',
+      'Reviewed model outputs and edge cases with stakeholders to improve recommendation relevance and reduce false alerts before release.',
+      'Used prompt engineering with LLMs (Claude, GPT) to prototype and validate AI features faster; built a reusable component system that reduced UI inconsistencies by 35%.',
+      'Mentored 5 junior team members, ran feature walkthroughs and presented AI feature demos to clients and leadership.',
     ],
     products: ['Loyaltri', 'Monkify AI', 'NovaCare', 'Veyro', 'Aura', 'Auvia'],
   },
   {
-    title: 'UI/UX Designer & Front-End Developer',
+    title: 'Front-End Engineer',
     company: 'Qmax',
     location: '[TODO: location]',
     period: 'Mar 2019 – Sep 2020',
     impact: [
-      'Designed and built real-time analytics dashboards and data visualisations, driving a 20% increase in user engagement.',
+      'Built real-time analytics dashboards and data visualisations, driving a 20% increase in user engagement.',
+      'Developed responsive front-end interfaces with HTML, CSS and JavaScript, integrating them with backend REST APIs.',
       'Created a reusable component and pattern library that sped up design-to-development handoff by 40%.',
-      'Developed responsive front-end interfaces with HTML, CSS and JavaScript, working closely with backend developers on API integration.',
     ],
     more: [],
   },
@@ -315,9 +310,13 @@ export const certifications = [
 
 // ───────────────────────────────────────────── shared copy
 
-/** From the resume: how I design AI features. Shown on every case study with an AI-features section. */
+/** From the resume: how model outputs reach users. Shown at the end of every deep dive. */
 export const aiDesignPrinciple =
-  'How I design AI features: clear prompt inputs, readable model output, confidence and fallback states, and human-in-the-loop review where it matters.';
+  'How I ship model outputs: confidence scores, fallback states for low-confidence results, and human-in-the-loop review flows.';
+
+/** From the resume: who I worked with. Shown in every case study's "team" column. */
+const teamNote =
+  'Backend and data engineers worked with me on data preparation, feature definitions and integrating model outputs through REST APIs, in 2-week Agile/Scrum sprints.';
 
 export const ctaCopy = {
   title: "Like this work? Let's talk.",
@@ -327,7 +326,7 @@ export const ctaCopy = {
 export const contactSection = {
   eyebrow: 'Contact',
   title: "Let's build something intelligent.",
-  text: 'Hiring for an AI/ML engineer, or have a product that needs ML that people can actually use? I reply to every message.',
+  text: 'Hiring an AI/ML engineer, or have a product that needs ML that people can actually use? I reply to every message.',
 };
 
 // ───────────────────────────────────────────── projects
@@ -335,7 +334,7 @@ export const contactSection = {
 const monkify: Project = {
   slug: 'monkify-ai',
   name: 'Monkify AI',
-  category: 'AI recruitment · iOS & Android',
+  category: 'AI recruitment · NLP matching · iOS & Android',
   accent: '#6A48F9',
   accent2: '#06B6D4',
   cover: '/projects/monkify-cover.webp',
@@ -347,19 +346,19 @@ const monkify: Project = {
     'Monkify AI results: training curves, a confusion matrix, before and after AI resume screening, candidate shortlisting, interview insights and job match scores.',
   secondaryTitle: 'Before vs after AI resume screening',
   outcome: 'Cut hiring time by 60% with AI-powered resume screening',
-  summary: 'An AI recruitment app that screens resumes, scores job matches and helps recruiters shortlist faster.',
+  summary: 'An AI recruitment app that parses resumes, matches candidates to jobs with embeddings and ranks them for recruiters.',
   cardMetric: { value: '60%', label: 'Reduced hiring time' },
-  tags: ['Machine learning', 'NLP', 'Mobile'],
+  tags: ['NLP', 'Semantic search', 'Mobile'],
   meta: {
-    role: 'ML engineering & product design',
+    role: 'AI/ML Product Engineer',
     duration: '[TODO: project duration]',
     team: '[TODO: team size and roles]',
     platform: 'iOS & Android',
-    stack: ['Python', 'TF-IDF', 'FastAPI', 'Docker', 'AWS', 'Figma'],
+    stack: ['Python', 'Sentence-Transformers', 'FAISS', 'FastAPI', 'Docker', 'AWS'],
   },
   tldr: {
     problem: 'Recruiters screened every resume by hand, at about 2–3 minutes each, with inconsistent results.',
-    did: 'I built a TF-IDF resume classifier, served it with FastAPI on AWS, and designed the matching and shortlisting flows around it.',
+    did: 'I built the matching pipeline: resume parsing, Sentence-Transformers embeddings and FAISS semantic search, served with FastAPI to the iOS and Android apps.',
     result: 'Screening became 70% faster, 85% of surfaced candidates were relevant, and hiring time fell by 60%.',
     metrics: [
       { value: '70%', label: 'Faster screening' },
@@ -374,36 +373,33 @@ const monkify: Project = {
       'Manual screening was also inconsistent, so shortlists were hard to trust.',
     ],
     affected: 'Recruiters and hiring managers screening applicants, and the candidates waiting to hear back.',
-    mattered: 'Screening is the bottleneck before interviews. Every hour saved there shortens time-to-hire for the whole pipeline.',
+    mattered: 'Screening is the bottleneck before interviews; every hour saved there shortens time-to-hire.',
     constraints: [
-      'Predictions had to come back fast enough to feel instant inside a mobile app.',
-      'Recruiters needed to stay in control: the AI ranks and explains, people decide.',
+      'Recruiters should review the best-matched candidates first, instead of screening every application.',
+      'Matches had to come back fast enough to feel instant inside a mobile app.',
       '[TODO: data, privacy or budget constraints]',
     ],
   },
   role: {
     owned: [
-      "I built the resume classification model: TF-IDF features and a classifier trained on Monkify's own platform data.",
-      'I evaluated it on a train/validation/test split, with per-class precision, recall and F1.',
-      'I served the model as a FastAPI service, containerised with Docker and deployed on AWS.',
-      'I designed and built the candidate-to-job matching flow, AI job recommendations, job filters and recruiter shortlisting dashboards for iOS and Android.',
+      'I built the candidate-to-job matching flow, starting with parsing resumes into structured skills, experience and role data.',
+      'I generated embeddings for candidates and job descriptions with Sentence-Transformers and ranked matches with semantic search on FAISS.',
+      'I evaluated match quality on 300 held-out resumes and served the pipeline with FastAPI and Docker on AWS.',
+      'I powered AI job recommendations, smart job filters and recruiter shortlisting dashboards on iOS and Android.',
     ],
-    team: [
-      'Product and engineering teams shipped the iOS and Android apps with me in Agile/Scrum sprints.',
-      '[TODO: team size and who owned the mobile and backend code]',
-    ],
+    team: [teamNote, '[TODO: team size and who owned the mobile and backend code]'],
   },
   process: [
-    { step: 'Research', text: 'I mapped how recruiters screened applicants. Manual review took about 2–3 minutes per resume.' },
-    { step: 'Define', text: 'I framed screening as three classes (Relevant, Partially Relevant, Not Relevant) to match how recruiters triage.' },
-    { step: 'Build', text: 'I built the TF-IDF + classifier pipeline and designed match scores, AI summaries and shortlisting into the app.' },
-    { step: 'Test', text: 'I validated the model on a held-out test set of 300 resumes and with recruiter feedback on real shortlists.' },
-    { step: 'Launch', text: 'I shipped the model behind a FastAPI service in Docker on AWS, powering the iOS and Android apps.' },
+    { step: 'Research', text: 'I mapped the recruiter workflow: every application screened by hand, at about 2–3 minutes per resume.' },
+    { step: 'Define', text: 'I framed it as ranking with three relevance classes and agreed success criteria with the product owner.' },
+    { step: 'Build', text: 'I built resume parsing, candidate and job embeddings, and FAISS semantic search behind a FastAPI service.' },
+    { step: 'Test', text: 'I validated on a held-out set of 300 resumes and reviewed edge cases with recruiters and stakeholders.' },
+    { step: 'Launch', text: 'The pipeline powers job recommendations, smart filters and shortlisting in the iOS and Android apps.' },
   ],
   solution: {
     intro: 'Monkify gives recruiters a ranked, explained shortlist instead of a pile of PDFs.',
     features: [
-      { icon: 'brain', title: 'AI-powered screening', text: 'Every resume is classified as Relevant, Partially Relevant or Not Relevant in seconds.' },
+      { icon: 'brain', title: 'AI-powered screening', text: 'Every candidate is ranked against the job: Relevant, Partially Relevant or Not Relevant.' },
       { icon: 'target', title: 'Job match score', text: 'Each candidate gets a match percentage per role, such as 92% for UI/UX Designer.' },
       { icon: 'sparkles', title: 'AI summary & interview insights', text: 'Recruiters read a short AI summary and generated interview insights on every profile.' },
       { icon: 'list-checks', title: 'One-tap shortlisting', text: 'Candidates move through Shortlisted, Interview and Hired from one list.' },
@@ -411,28 +407,28 @@ const monkify: Project = {
   },
   ai: {
     kind: 'deep-dive',
-    intro:
-      'I built the screening model end to end: data, features, training, evaluation and the API the apps call.',
+    title: 'AI/ML deep dive',
+    intro: 'I built the matching pipeline end to end: parsing, embeddings, search, evaluation and the API the apps call.',
     data: {
-      text: "I trained on Monkify's own platform data: resumes and job posts collected through the app, labelled by relevance.",
+      text: "Monkify's own platform data: resumes and job posts from the app, each resume parsed into skills, experience and role.",
       facts: [
         { label: 'Source', value: 'Monkify platform data (resumes and job posts)' },
         { label: 'Volume', value: '[TODO: number of resumes and jobs]' },
-        { label: 'Labels', value: 'Relevant · Partially Relevant · Not Relevant' },
+        { label: 'Parsed into', value: 'Skills · experience · role' },
         { label: 'Test set', value: '300 resumes, 100 per class' },
       ],
     },
     model: {
-      text: 'I turned resume and job text into TF-IDF features and trained a classifier to predict relevance in three classes: fast, light to serve and easy to explain.',
+      text: 'I embedded candidates and job descriptions with Sentence-Transformers and ranked pairs by similarity with FAISS, so skills match by meaning, not keyword.',
       facts: [
-        { label: 'Features', value: 'TF-IDF vectors from resume and job text' },
-        { label: 'Classifier', value: '[TODO: algorithm, e.g. Logistic Regression or SVM]' },
-        { label: 'Classes', value: '3' },
-        { label: 'Training', value: '25 epochs (see curves)' },
+        { label: 'Parsing', value: 'Resume → skills, experience, role' },
+        { label: 'Embeddings', value: 'Sentence-Transformers' },
+        { label: 'Search', value: 'FAISS vector search (semantic similarity)' },
+        { label: 'Output', value: 'Ranked matches in 3 relevance classes' },
       ],
     },
     evaluation: {
-      text: 'I tracked loss and accuracy on training and validation sets every epoch, then scored a held-out test set per class. Recruiters reviewed AI shortlists as a human-in-the-loop check.',
+      text: 'I tracked training and validation loss and accuracy every epoch, then scored a held-out test set of 300 resumes per class. Recruiters reviewed AI shortlists as a human-in-the-loop check.',
       facts: [
         { label: 'Split', value: 'Train / validation / test [TODO: split ratio]' },
         { label: 'Test accuracy', value: '84.7% (254 of 300 correct)' },
@@ -457,7 +453,7 @@ const monkify: Project = {
       ],
     },
     serving: {
-      text: 'I wrapped the model in a FastAPI service, containerised it with Docker and deployed it on AWS. The iOS and Android apps call it for screening and shortlisting.',
+      text: 'I wrapped the pipeline in a FastAPI service, containerised it with Docker and deployed it on AWS. The iOS and Android apps call it for recommendations, filters and shortlists.',
       facts: [
         { label: 'API', value: 'FastAPI (Python)' },
         { label: 'Packaging', value: 'Docker' },
@@ -466,12 +462,13 @@ const monkify: Project = {
       ],
     },
     architecture: {
-      title: 'How a resume becomes a shortlist',
-      caption: 'From platform data to the recruiter app, with recruiter feedback closing the loop.',
+      title: 'How a resume becomes a ranked shortlist',
+      caption: 'From raw resumes to a ranked shortlist, with recruiter feedback closing the loop.',
       nodes: [
         { title: 'Platform data', sub: 'Resumes & job posts' },
-        { title: 'TF-IDF', sub: 'Text → feature vectors' },
-        { title: 'Classifier', sub: '3 relevance classes' },
+        { title: 'Parsing', sub: 'Skills & experience' },
+        { title: 'Embeddings', sub: 'Sentence-Transformers' },
+        { title: 'FAISS', sub: 'Semantic search' },
         { title: 'FastAPI', sub: 'Docker on AWS' },
         { title: 'Recruiter app', sub: 'iOS & Android' },
       ],
@@ -480,9 +477,9 @@ const monkify: Project = {
   },
   decisions: [
     {
-      title: 'TF-IDF and a classic classifier, not a large transformer',
-      why: 'It trains fast, serves cheaply from a small container, and its features explain each prediction.',
-      notChosen: 'A fine-tuned transformer: heavier to serve and harder to explain for a first release.',
+      title: 'Semantic matching with embeddings, not keyword filters',
+      why: 'Candidates describe the same skill in different words. Embeddings match on meaning, so strong profiles aren’t lost to wording.',
+      notChosen: 'Boolean keyword filters on job titles and skills.',
     },
     {
       title: 'Three relevance classes instead of yes/no',
@@ -524,7 +521,7 @@ const monkify: Project = {
       { value: '84.7%', label: 'Test-set accuracy', detail: '254 of 300 resumes' },
     ],
     impact:
-      'Recruiters now spend their time on interviews instead of inbox triage. Faster, more consistent screening shortens the path from job post to hire.',
+      'Recruiters review the best-matched candidates first instead of screening every application. Faster, more consistent screening shortens the path from job post to hire.',
     breakdowns: [
       {
         title: 'Job match score',
@@ -540,26 +537,26 @@ const monkify: Project = {
     ],
   },
   learned: [
-    'A simple, explainable model that ships beats a complex one that doesn’t. TF-IDF gave recruiters real value fast.',
+    'Parsing quality caps matching quality: clean skills and experience data mattered as much as the model.',
     'The confusion matrix is a product tool, not just a metric: it showed exactly where recruiters needed to stay in the loop.',
-    'Next, I’d test embedding-based semantic matching with Sentence-Transformers against the TF-IDF baseline, focusing on the Partially Relevant class.',
+    'Next, I’d add hybrid retrieval (keywords plus embeddings) and target the Partially Relevant class, where recall is lowest at 78%.',
   ],
-  stack: ['Python', 'TF-IDF', 'FastAPI', 'Docker', 'AWS', 'Figma'],
+  stack: ['Python', 'NLP', 'Resume parsing', 'Sentence-Transformers', 'FAISS', 'FastAPI', 'Docker', 'AWS'],
   links: [
     { label: 'Live app', href: '[TODO: App Store / Play Store link]' },
     { label: 'GitHub', href: '[TODO: repository link]' },
   ],
   seo: {
-    title: 'Monkify AI: AI resume screening case study',
+    title: 'Monkify AI: NLP job matching case study',
     description:
-      'How Dinesh Kumar built a TF-IDF resume classifier served with FastAPI on AWS, cutting hiring time by 60% and screening time by 70%.',
+      'How Dinesh Kumar built NLP job matching with resume parsing, Sentence-Transformers and FAISS, cutting hiring time by 60% and screening time by 70%.',
   },
 };
 
 const loyaltri: Project = {
   slug: 'loyaltri',
   name: 'Loyaltri',
-  category: 'AI HRMS · Web SaaS · India & GCC',
+  category: 'AI HRMS · People analytics · India & GCC',
   accent: '#6A4EF4',
   accent2: '#A78BFA',
   cover: '/projects/loyaltri-cover.webp',
@@ -570,25 +567,25 @@ const loyaltri: Project = {
   secondaryAlt:
     'Before: paper forms, an old registration form and an employee list with no tracking. After: Loyaltri’s 4-step online onboarding with progress tracking.',
   secondaryTitle: 'Before vs after onboarding',
-  outcome: 'Took employee onboarding 100% online for HR teams across India and the GCC',
-  summary: 'An AI-powered HRMS covering onboarding, attendance, payroll, leave and recruitment.',
+  outcome: 'Built people analytics and 100% online onboarding for HR teams across India and the GCC',
+  summary: 'An AI-powered HRMS for onboarding, attendance, payroll, leave and recruitment, with people-analytics dashboards.',
   cardMetric: { value: '100%', label: 'Online onboarding' },
-  tags: ['HR-tech SaaS', 'People analytics', 'AI features'],
+  tags: ['People analytics', 'Python & SQL', 'HR-tech SaaS'],
   meta: {
-    role: 'Senior UI/UX & Product Designer',
+    role: 'AI/ML Product Engineer',
     duration: '[TODO: project duration]',
     team: '[TODO: team size]',
     platform: 'Web app (SaaS)',
-    stack: ['Figma', '[TODO: other tools]'],
+    stack: ['Python', 'Pandas', 'SQL', 'PostgreSQL', 'Plotly / Power BI', 'REST APIs'],
   },
   tldr: {
     problem: 'Onboarding ran on paper forms and scattered documents, which caused delays and errors.',
-    did: "I designed Loyaltri's onboarding, attendance, payroll, leave and recruitment modules, plus its people-analytics dashboards.",
-    result: 'Onboarding became a 100% online, 4-step flow with automatic validation and real-time tracking.',
+    did: "I delivered Loyaltri's onboarding, attendance, payroll, leave and recruitment modules, and built people-analytics dashboards on attendance, leave and payroll data.",
+    result: 'Onboarding became 100% online with automatic validation and real-time tracking, and HR teams see trends like absenteeism, overtime and headcount movement.',
     metrics: [
       { value: '100%', label: 'Online onboarding' },
-      { value: '5', label: 'HR modules designed' },
-      { value: '4', label: 'Guided onboarding steps' },
+      { value: '5', label: 'HR modules delivered' },
+      { value: '3', label: 'Workforce trends tracked', detail: 'Absenteeism · overtime · headcount' },
       { value: 'India + GCC', label: 'Client regions' },
     ],
   },
@@ -597,7 +594,7 @@ const loyaltri: Project = {
       'HR teams handled onboarding manually, with paper forms and documents scattered across the business.',
       'Every new hire meant time-consuming data entry, a higher chance of human error and no way to see progress in real time.',
     ],
-    affected: 'HR teams onboarding employees, and new hires waiting to get started.',
+    affected: 'HR teams onboarding employees and managing attendance, leave and payroll, and new hires waiting to get started.',
     mattered: 'Slow, error-prone onboarding delays a new hire’s first day and gets harder to manage as headcount grows.',
     constraints: [
       'One platform had to cover onboarding, attendance, payroll, leave and recruitment.',
@@ -607,20 +604,17 @@ const loyaltri: Project = {
   },
   role: {
     owned: [
-      'I designed the onboarding, attendance, payroll, leave and recruitment modules.',
-      'I designed AI-driven HR features and people-analytics dashboards that turn attendance and payroll data into clear insights for HR teams.',
-      'I designed the 4-step digital onboarding flow with live progress tracking.',
+      'I delivered the onboarding, attendance, payroll, leave and recruitment modules.',
+      'I built people-analytics dashboards that turn attendance, leave and payroll data into trends such as absenteeism, overtime and headcount movement.',
+      'I wrote the analytics in Python, Pandas and SQL on PostgreSQL, and served them to the web app through REST APIs.',
     ],
-    team: [
-      'Engineering and product teams built and shipped the platform with me in Agile/Scrum sprints.',
-      '[TODO: team size]',
-    ],
+    team: [teamNote, '[TODO: team size]'],
   },
   process: [
     { step: 'Research', text: 'I mapped the manual process and its pain points: paper forms, data entry, errors and no tracking.' },
-    { step: 'Define', text: 'I broke onboarding into four steps: Personal Details, Work Details, Documents and Review.' },
-    { step: 'Design', text: 'I designed the onboarding flow, HR modules and analytics dashboards on shared components.' },
-    { step: 'Test', text: 'I reviewed each flow with product and engineering in sprint reviews before release.' },
+    { step: 'Define', text: 'I defined the trends HR needs (absenteeism, overtime, headcount movement) and split onboarding into four steps.' },
+    { step: 'Build', text: 'I built the analytics in Python, Pandas and SQL on PostgreSQL, with dashboards in Plotly / Power BI.' },
+    { step: 'Test', text: 'I reviewed the numbers and edge cases with HR stakeholders before each release.' },
     { step: 'Launch', text: 'Loyaltri rolled out to client companies across India and the GCC.' },
   ],
   solution: {
@@ -633,28 +627,66 @@ const loyaltri: Project = {
     ],
   },
   ai: {
-    kind: 'features',
-    intro: 'Loyaltri is an AI-powered HRMS. My job was to make its AI and data genuinely useful to HR teams.',
-    features: [
-      { icon: 'line-chart', title: 'People-analytics dashboards', text: 'Turn attendance and payroll data into clear insights for HR teams.' },
-      { icon: 'sparkles', title: 'AI-driven HR features', text: 'Designed into the core HR workflows. [TODO: name the specific AI features]' },
-    ],
+    kind: 'deep-dive',
+    title: 'People-analytics deep dive',
+    intro: 'Behind the dashboards is a data pipeline that turns raw HR records into trends HR teams can act on.',
+    data: {
+      text: 'Attendance, leave and payroll records from the HRMS, stored in PostgreSQL.',
+      facts: [
+        { label: 'Sources', value: 'Attendance · leave · payroll' },
+        { label: 'Storage', value: 'PostgreSQL' },
+        { label: 'Volume', value: '[TODO: employees or records covered]' },
+      ],
+    },
+    model: {
+      title: 'Analytics approach',
+      text: 'I wrote SQL and Pandas transformations that turn raw records into workforce trends: absenteeism, overtime and headcount movement.',
+      facts: [
+        { label: 'Tools', value: 'Python · Pandas · SQL' },
+        { label: 'Trends', value: 'Absenteeism · overtime · headcount movement' },
+      ],
+    },
+    evaluation: {
+      title: 'Validation',
+      text: 'I reviewed the numbers and edge cases with HR stakeholders before release, so the dashboards matched what HR saw on the ground.',
+      facts: [{ label: 'Accuracy checks', value: '[TODO: how the figures were validated]' }],
+    },
+    serving: {
+      text: 'The analytics reach HR teams through REST APIs and dashboards built with Plotly / Power BI inside the web app.',
+      facts: [
+        { label: 'API', value: 'REST APIs' },
+        { label: 'Dashboards', value: 'Plotly / Power BI' },
+        { label: 'Users', value: 'HR teams across India and the GCC' },
+      ],
+    },
+    architecture: {
+      title: 'From HR records to people analytics',
+      caption: 'Attendance, leave and payroll data flow into trends HR teams read every day.',
+      nodes: [
+        { title: 'HR data', sub: 'Attendance, leave, payroll' },
+        { title: 'PostgreSQL', sub: 'SQL queries' },
+        { title: 'Pandas', sub: 'Trend metrics' },
+        { title: 'REST APIs', sub: 'Web app' },
+        { title: 'Dashboards', sub: 'Plotly / Power BI' },
+      ],
+      loop: 'Stakeholder review',
+    },
   },
   decisions: [
     {
+      title: 'Trends HR can act on, not raw tables',
+      why: 'Absenteeism, overtime and headcount movement answer HR’s real questions faster than raw attendance logs.',
+      notChosen: 'Exporting raw records for HR to analyse in spreadsheets.',
+    },
+    {
       title: 'Four short steps instead of one long form',
-      why: 'The old registration form asked for everything at once. Steps with a progress ring make onboarding feel shorter and easier to finish.',
+      why: 'The old registration form asked for everything at once. Steps with a progress ring make onboarding easier to finish.',
       notChosen: 'Restyling the single long form.',
     },
     {
       title: 'Save Draft at every step',
       why: 'New hires don’t always have every document to hand. Drafts let them finish later without losing work.',
       notChosen: 'Forcing onboarding to be completed in one sitting.',
-    },
-    {
-      title: 'One status language everywhere',
-      why: 'Completed, In Progress and Pending mean the same thing in the employee’s flow and in HR’s list, so nobody has to translate.',
-      notChosen: 'Separate status systems for employees and HR.',
     },
   ],
   beforeAfter: {
@@ -684,32 +716,29 @@ const loyaltri: Project = {
       { value: '100%', label: 'Online onboarding process' },
       { value: '4', label: 'Guided steps with live progress' },
       { value: '5', label: 'HR modules on one platform' },
-      { value: 'Real-time', label: 'Onboarding tracking & status' },
+      { value: '3', label: 'Workforce trends on dashboards' },
     ],
     impact:
-      'Less manual work, more time for what matters. HR teams onboard people with fewer errors, and every hire’s progress is visible in real time.',
+      'Less manual work, more time for what matters. HR teams onboard people with fewer errors, track progress in real time and see workforce trends at a glance.',
   },
   learned: [
-    'Visibility matters as much as speed: people trust a process they can see.',
-    'Shared components kept five HR modules consistent and faster to design.',
-    'Next, I’d measure time-to-onboard per hire to put a hard number on “faster onboarding”.',
+    'Analytics are only useful when they answer a question: three focused trends beat a wall of charts.',
+    'Reviewing the numbers and edge cases with HR stakeholders is part of shipping analytics, not an afterthought.',
+    'Next, I’d add forecasting on top of the trends, such as predicting overtime peaks, and measure time-to-onboard per hire.',
   ],
-  stack: ['Figma', 'Design system', 'Data visualisation', '[TODO: other tools]'],
-  links: [
-    { label: 'Live product', href: '[TODO: Loyaltri link]' },
-    { label: 'Figma', href: '[TODO: Figma link]' },
-  ],
+  stack: ['Python', 'Pandas', 'SQL', 'PostgreSQL', 'Plotly / Power BI', 'REST APIs'],
+  links: [{ label: 'Live product', href: '[TODO: Loyaltri link]' }],
   seo: {
-    title: 'Loyaltri: AI HRMS onboarding case study',
+    title: 'Loyaltri: people analytics case study',
     description:
-      'How Dinesh Kumar designed Loyaltri’s AI-powered HRMS and took employee onboarding 100% online for HR teams across India and the GCC.',
+      'How Dinesh Kumar built people-analytics dashboards with Python, SQL and PostgreSQL and took HR onboarding 100% online across India and the GCC.',
   },
 };
 
 const novacare: Project = {
   slug: 'novacare',
   name: 'NovaCare',
-  category: 'Healthcare · Patient mobile app',
+  category: 'Healthcare · NLP recommendations · Mobile',
   accent: '#1E5CF9',
   accent2: '#5EEAD4',
   cover: '/projects/novacare-cover.webp',
@@ -720,19 +749,19 @@ const novacare: Project = {
     'NovaCare results: +65% bookings, −40% waiting time, +55% doctor utilization, +70% satisfaction, a before and after comparison, booking trend, patient distribution and satisfaction scores.',
   secondaryTitle: 'NovaCare results & impact',
   outcome: 'Cut patient waiting time by 40% and grew appointment bookings by 65%',
-  summary: 'A patient app for finding doctors, booking, video consults, digital prescriptions and health tracking.',
+  summary: 'A patient app for doctor discovery, booking, reminders and health records, with symptom-based doctor recommendations.',
   cardMetric: { value: '+65%', label: 'Appointment bookings' },
-  tags: ['Healthcare', 'Mobile', 'AI recommendations'],
+  tags: ['NLP', 'Recommendations', 'Healthcare'],
   meta: {
-    role: 'Senior UI/UX & Product Designer',
+    role: 'AI/ML Product Engineer',
     duration: '[TODO: project duration]',
     team: '[TODO: team size]',
     platform: 'Mobile app (patient-facing)',
-    stack: ['Figma', '[TODO: other tools]'],
+    stack: ['Python', 'NLP text classification', 'scikit-learn', 'REST APIs'],
   },
   tldr: {
     problem: 'Patients made multiple hospital visits to find the right doctor, then waited a long time at the clinic.',
-    did: 'I designed doctor discovery, booking, reminders and health records, with symptom-based doctor recommendations.',
+    did: 'I delivered symptom-based doctor recommendations (NLP text classification mapping symptoms to medical specialities) and smart appointment slot suggestions.',
     result: 'Bookings rose 65%, waiting time fell 40% and patient satisfaction rose 70%.',
     metrics: [
       { value: '+65%', label: 'Appointment bookings' },
@@ -747,7 +776,7 @@ const novacare: Project = {
       'Prescriptions were handled manually, health records were hard to track, and follow-ups and reminders were limited.',
     ],
     affected: 'Patients looking for care, and doctors whose time was under-used.',
-    mattered: 'Long waits and missed follow-ups hurt the patient experience and waste doctors’ time.',
+    mattered: 'Sending a patient to the wrong specialist wastes a visit, and long waits hurt the patient experience.',
     constraints: [
       'Patients with any level of tech confidence had to book without help.',
       '[TODO: regulatory or data-privacy constraints]',
@@ -755,20 +784,18 @@ const novacare: Project = {
   },
   role: {
     owned: [
-      'I designed doctor discovery, appointment booking, reminders and health records.',
-      'I designed the AI-assisted features: symptom-based doctor recommendations and smart appointment slot suggestions.',
+      'I delivered symptom-based doctor recommendations: an NLP text classifier that maps patient symptoms to medical specialities.',
+      'I delivered smart appointment slot suggestions.',
+      'I worked on doctor discovery, appointment booking, reminders and health records, integrating model outputs into the app through REST APIs.',
     ],
-    team: [
-      'Engineering and product teams built and shipped the app with me in Agile/Scrum sprints.',
-      '[TODO: team size]',
-    ],
+    team: [teamNote, '[TODO: team size]'],
   },
   process: [
     { step: 'Research', text: 'I mapped the patient journey from finding a doctor to follow-up, and where it broke down.' },
-    { step: 'Define', text: 'I set four pillars: book appointments, video consultation, digital prescriptions and health tracking.' },
-    { step: 'Design', text: 'I designed specialty filters, doctor cards with ratings and experience, and one-tap booking.' },
-    { step: 'Test', text: 'I iterated on the booking flow with the product team through sprint reviews.' },
-    { step: 'Launch', text: 'NovaCare launched with booking, consults, prescriptions and health insights in one app.' },
+    { step: 'Define', text: 'I framed recommendations as text classification: symptoms in, medical speciality out.' },
+    { step: 'Build', text: 'I built the classifier with Python and scikit-learn and served it through REST APIs.' },
+    { step: 'Test', text: 'I reviewed recommendations and edge cases with stakeholders before release.' },
+    { step: 'Launch', text: 'NovaCare launched with recommendations, booking, consults, prescriptions and health insights in one app.' },
   ],
   solution: {
     intro: 'NovaCare puts the whole care journey in one app, from finding a doctor to following up.',
@@ -780,28 +807,64 @@ const novacare: Project = {
     ],
   },
   ai: {
-    kind: 'features',
-    intro: 'NovaCare uses AI to get patients to the right doctor at the right time. I designed how patients meet it.',
-    features: [
-      { icon: 'stethoscope', title: 'Symptom-based doctor recommendations', text: 'Patients describe symptoms and get pointed to the right specialty and doctor.' },
-      { icon: 'clock', title: 'Smart appointment slot suggestions', text: 'The app suggests suitable slots so booking takes seconds.' },
-    ],
+    kind: 'deep-dive',
+    title: 'AI/ML deep dive',
+    intro: 'NovaCare’s recommendations start with what the patient types.',
+    data: {
+      text: 'Patient symptom descriptions paired with the medical speciality that treats them.',
+      facts: [
+        { label: 'Input', value: 'Patient symptom text' },
+        { label: 'Target', value: 'Medical speciality' },
+        { label: 'Volume', value: '[TODO: number of labelled examples]' },
+      ],
+    },
+    model: {
+      text: 'An NLP text-classification model built with scikit-learn maps symptoms to specialities such as Cardiology, Dermatology or Pediatrics. The app then suggests matching doctors and appointment slots.',
+      facts: [
+        { label: 'Task', value: 'Multi-class text classification' },
+        { label: 'Library', value: 'scikit-learn' },
+        { label: 'Features', value: '[TODO: text features, e.g. TF-IDF]' },
+      ],
+    },
+    evaluation: {
+      text: 'I reviewed recommendations and edge cases with stakeholders before release to improve recommendation relevance.',
+      facts: [{ label: 'Metrics', value: '[TODO: accuracy or F1 on held-out data]' }],
+    },
+    serving: {
+      text: 'The model runs behind REST APIs; the mobile app calls it while the patient books.',
+      facts: [
+        { label: 'API', value: 'REST APIs' },
+        { label: 'Client', value: 'NovaCare mobile app' },
+      ],
+    },
+    architecture: {
+      title: 'From symptoms to the right doctor',
+      caption: 'The patient’s words go in; a speciality, matching doctors and open slots come out.',
+      nodes: [
+        { title: 'Symptoms', sub: 'Patient text' },
+        { title: 'NLP', sub: 'Text features' },
+        { title: 'Classifier', sub: 'scikit-learn' },
+        { title: 'REST API', sub: 'Speciality' },
+        { title: 'Booking app', sub: 'Doctors & slots' },
+      ],
+      loop: 'Edge-case review',
+    },
   },
   decisions: [
+    {
+      title: 'Text classification over a rules-based symptom checker',
+      why: 'A model learns many ways of describing the same symptom; hand-written rules break on new wording.',
+      notChosen: 'A hard-coded symptom-to-speciality lookup table.',
+    },
+    {
+      title: 'Recommendations suggest, patients decide',
+      why: 'The model narrows the options to a speciality, while the patient still chooses the doctor and the slot.',
+      notChosen: 'Assigning a doctor automatically.',
+    },
     {
       title: 'Specialty-first discovery',
       why: 'Patients think in problems, not doctor names. Specialty chips such as Cardiology, Pediatrics and Dermatology lead straight to the right doctors.',
       notChosen: 'A search-only doctor directory.',
-    },
-    {
-      title: 'Recommendations suggest, patients decide',
-      why: 'Symptom-based recommendations narrow the options, while the patient still chooses the doctor and the slot.',
-      notChosen: 'Assigning a doctor automatically.',
-    },
-    {
-      title: 'Reminders next to the appointment',
-      why: 'Follow-ups were easy to miss before. Reminders sit right next to the upcoming appointment on the home screen.',
-      notChosen: 'Leaving follow-ups to the clinic.',
     },
   ],
   beforeAfter: {
@@ -835,7 +898,7 @@ const novacare: Project = {
       { value: '2,850', label: 'Patients', detail: 'Across six departments' },
     ],
     impact:
-      'More patients booked through the app, and doctors’ time was better used. Ease of booking scored 92% with app users.',
+      'More patients reached the right specialist through the app, and doctors’ time was better used. Ease of booking scored 92% with app users.',
     breakdowns: [
       {
         title: 'Patient satisfaction',
@@ -862,26 +925,23 @@ const novacare: Project = {
     ],
   },
   learned: [
-    'In healthcare, clarity beats cleverness: every extra tap is a patient who might give up.',
+    'In healthcare, a wrong recommendation costs a visit, so relevance mattered more than coverage.',
     'Satisfaction breakdowns show where to focus next: overall experience (87%) trails ease of booking (92%).',
-    'Next, I’d test recommendation explanations, showing patients why a specialty was suggested.',
+    'Next, I’d show a confidence score on each recommendation and fall back to a General Physician when the model is unsure.',
   ],
-  stack: ['Figma', '[TODO: other tools]'],
-  links: [
-    { label: 'Live app', href: '[TODO: NovaCare link]' },
-    { label: 'Figma', href: '[TODO: Figma link]' },
-  ],
+  stack: ['Python', 'NLP text classification', 'scikit-learn', 'REST APIs'],
+  links: [{ label: 'Live app', href: '[TODO: NovaCare link]' }],
   seo: {
-    title: 'NovaCare: healthcare app case study',
+    title: 'NovaCare: symptom-based recommendations case study',
     description:
-      'How Dinesh Kumar designed NovaCare’s patient app, growing appointment bookings by 65% and cutting waiting time by 40%.',
+      'How Dinesh Kumar delivered NLP symptom-to-speciality recommendations in NovaCare, growing appointment bookings by 65% and cutting waiting time by 40%.',
   },
 };
 
 const veyro: Project = {
   slug: 'veyro',
   name: 'Veyro',
-  category: 'Fintech · Payments & spend analytics',
+  category: 'Fintech · Transaction classification · Spend analytics',
   accent: '#1562E9',
   accent2: '#22C55E',
   cover: '/projects/fintech-cover.webp',
@@ -893,19 +953,19 @@ const veyro: Project = {
     'Before: five separate apps for banking, bills, insurance, ATMs and gift cards. After: one Veyro app, with +48% active users, +62% transactions, −40% payment time and −70% payment failures.',
   secondaryTitle: 'Five apps → one app',
   outcome: 'Merged five finance apps into one and grew transactions by 62%',
-  summary: 'One app for payments, bills, insurance, ATM search and gift cards, with AI spend insights.',
+  summary: 'One app for payments, bills, insurance, ATM search and gift cards, with ML transaction categorisation and spend insights.',
   cardMetric: { value: '+62%', label: 'Transactions' },
-  tags: ['Fintech', 'Payments', 'Spend analytics'],
+  tags: ['Classification', 'XGBoost', 'Fintech'],
   meta: {
-    role: 'Senior UI/UX & Product Designer',
+    role: 'AI/ML Product Engineer',
     duration: '[TODO: project duration]',
     team: '[TODO: team size]',
     platform: 'Mobile app',
-    stack: ['Figma', '[TODO: other tools]'],
+    stack: ['Python', 'Pandas', 'scikit-learn', 'XGBoost', 'Plotly'],
   },
   tldr: {
-    problem: 'Users juggled separate apps for banking, bills, insurance, ATM search and gift cards, each with a different interface.',
-    did: 'I designed one unified app for payments, transaction history and spend tracking, with automatic transaction categorisation and AI spend insights.',
+    problem: 'Users juggled separate apps for banking, bills, insurance, ATM search and gift cards, and couldn’t see where their money went.',
+    did: 'I worked on automatic transaction categorisation (multi-class classification on merchant and transaction text) and delivered AI spend insights with visual dashboards.',
     result: 'Transactions rose 62%, active users grew 48%, and payment failures fell 70%.',
     metrics: [
       { value: '+48%', label: 'Active users' },
@@ -928,55 +988,88 @@ const veyro: Project = {
   },
   role: {
     owned: [
-      'I designed payments, transaction history and personal spend tracking.',
-      'I designed AI-driven spend insights, automatic transaction categorisation and data-visualisation dashboards.',
-      'I designed the unified home screen, the Pay Bill flow and the ATM locator.',
+      'I worked on automatic transaction categorisation: multi-class classification on merchant and transaction text with scikit-learn and XGBoost.',
+      'I delivered AI-driven spend insights and Plotly dashboards that explain where users’ money goes in plain language.',
+      'I worked on payments, transaction history and personal spend tracking, integrating model outputs into the app through REST APIs.',
     ],
-    team: [
-      'Engineering and product teams built and shipped the app with me in Agile/Scrum sprints.',
-      '[TODO: team size]',
-    ],
+    team: [teamNote, '[TODO: team size]'],
   },
   process: [
     { step: 'Research', text: 'I compared the five separate experiences users relied on: banking, bills, insurance, ATMs and gift cards.' },
-    { step: 'Define', text: 'I grouped everything into Quick Actions and Services on a single home screen.' },
-    { step: 'Design', text: 'I designed one Pay Bill pattern for every biller, a transactions feed and an ATM locator with walking time.' },
-    { step: 'Test', text: 'I refined the flows with product and engineering through sprint reviews.' },
-    { step: 'Launch', text: 'Veyro launched as one app for every everyday money task.' },
+    { step: 'Define', text: 'I framed categorisation as multi-class classification and agreed success criteria with the product owner.' },
+    { step: 'Build', text: 'I built features from merchant and transaction text in Pandas and trained classifiers with scikit-learn and XGBoost.' },
+    { step: 'Test', text: 'I reviewed predictions and edge cases with stakeholders before release.' },
+    { step: 'Launch', text: 'Veyro launched as one app for everyday money tasks, with categories and insights built in.' },
   ],
   solution: {
-    intro: 'Veyro replaces five apps with one home screen that knows what you do most.',
+    intro: 'Veyro replaces five apps with one home screen, and tells users where their money goes.',
     features: [
       { icon: 'wallet', title: 'One unified home', text: 'Card balance, quick actions, services and recent transactions on one screen.' },
       { icon: 'receipt', title: 'Easy bill payments', text: 'Internet, electricity, water and DTH bills in one Pay Bill flow.' },
-      { icon: 'pie-chart', title: 'Smart financial tracking', text: 'Transactions sorted automatically, with AI spend insights and dashboards.' },
+      { icon: 'pie-chart', title: 'Smart financial tracking', text: 'Every transaction categorised automatically, with AI spend insights.' },
       { icon: 'gift', title: 'Rewards & gift cards', text: 'Eid, birthday and marriage gift cards with cashback offers.' },
     ],
   },
   ai: {
-    kind: 'features',
-    intro: 'Veyro’s AI turns a list of transactions into an answer to “where did my money go?”. I designed how users see it.',
-    features: [
-      { icon: 'layers', title: 'Automatic transaction categorisation', text: 'Every payment is sorted into a category without manual tagging.' },
-      { icon: 'line-chart', title: 'AI spend insights', text: 'Spending patterns turned into short, readable insights.' },
-      { icon: 'pie-chart', title: 'Data-visualisation dashboards', text: 'Spending shown as clear charts users can scan in seconds.' },
-    ],
+    kind: 'deep-dive',
+    title: 'AI/ML deep dive',
+    intro: 'Veyro’s categories turn a list of transactions into an answer to “where did my money go?”.',
+    data: {
+      text: 'Transaction records with merchant names and transaction text, prepared in Pandas.',
+      facts: [
+        { label: 'Input', value: 'Merchant name · transaction text' },
+        { label: 'Volume', value: '[TODO: number of transactions]' },
+        { label: 'Categories', value: '[TODO: list of spending categories]' },
+      ],
+    },
+    model: {
+      text: 'Multi-class classification on merchant and transaction text with scikit-learn and XGBoost. Predicted categories feed the spend insights and dashboards.',
+      facts: [
+        { label: 'Task', value: 'Multi-class classification' },
+        { label: 'Libraries', value: 'scikit-learn · XGBoost' },
+        { label: 'Features', value: 'Merchant and transaction text' },
+      ],
+    },
+    evaluation: {
+      text: 'I reviewed predictions and edge cases with stakeholders before release.',
+      facts: [{ label: 'Metrics', value: '[TODO: accuracy or F1 per category]' }],
+    },
+    serving: {
+      text: 'Categories reach the app through REST APIs, and spend dashboards are built with Plotly.',
+      facts: [
+        { label: 'API', value: 'REST APIs' },
+        { label: 'Dashboards', value: 'Plotly' },
+        { label: 'Client', value: 'Veyro mobile app' },
+      ],
+    },
+    architecture: {
+      title: 'From a payment to a spend insight',
+      caption: 'Every transaction is categorised automatically and rolled up into plain-language insights.',
+      nodes: [
+        { title: 'Transactions', sub: 'Merchant & text' },
+        { title: 'Pandas', sub: 'Text features' },
+        { title: 'XGBoost', sub: 'Multi-class model' },
+        { title: 'REST API', sub: 'Categories' },
+        { title: 'Spend insights', sub: 'App dashboards' },
+      ],
+      loop: 'Edge-case review',
+    },
   },
   decisions: [
+    {
+      title: 'Categorise automatically, explain in plain language',
+      why: 'Users shouldn’t have to tag transactions. The classifier labels every payment, and insights explain spending in words, not just charts.',
+      notChosen: 'Manual tagging before any insight appears.',
+    },
+    {
+      title: 'Gradient-boosted trees for categorisation',
+      why: 'XGBoost handles sparse text features well, trains fast and is easy to inspect with feature importance.',
+      notChosen: 'A deep model that would be heavier to serve for a first release.',
+    },
     {
       title: 'Two tiers on the home screen: Quick Actions and Services',
       why: 'Daily tasks (transfer, pay bill, scan & pay, gift cards) sit one tap away; occasional services sit one row below.',
       notChosen: 'A separate tab for every service.',
-    },
-    {
-      title: 'One Pay Bill pattern for every biller',
-      why: 'Select a bill, check the details, pay. Learning it once works for internet, electricity, water and DTH.',
-      notChosen: 'A custom flow per bill type.',
-    },
-    {
-      title: 'Categorise automatically, explain visually',
-      why: 'Users shouldn’t have to tag transactions. Automatic categories feed the spend insights and dashboards.',
-      notChosen: 'Manual tagging before insights appear.',
     },
   ],
   beforeAfter: {
@@ -1009,29 +1102,26 @@ const veyro: Project = {
       { value: '−70%', label: 'Payment failures' },
     ],
     impact:
-      'One app means more reasons to come back: users transact more, pay faster and fail less, and the business keeps them in a single product.',
+      'One app with built-in spend insights gives users more reasons to come back: they transact more, pay faster and fail less.',
   },
   learned: [
+    'A category is only useful when the insight built on it is easy to read.',
     'Consolidation is an information-architecture problem first: deciding what lives on the home screen decides everything else.',
-    'Consistent patterns compound. One Pay Bill flow made every new biller cheap to add.',
-    'Next, I’d test how users respond to spend insights, and which insights actually change behaviour.',
+    'Next, I’d add confidence thresholds so low-confidence transactions ask the user, and feed those answers back as new training labels.',
   ],
-  stack: ['Figma', '[TODO: other tools]'],
-  links: [
-    { label: 'Live app', href: '[TODO: Veyro link]' },
-    { label: 'Figma', href: '[TODO: Figma link]' },
-  ],
+  stack: ['Python', 'Pandas', 'scikit-learn', 'XGBoost', 'Plotly'],
+  links: [{ label: 'Live app', href: '[TODO: Veyro link]' }],
   seo: {
-    title: 'Veyro: unified fintech app case study',
+    title: 'Veyro: transaction classification case study',
     description:
-      'How Dinesh Kumar merged five finance apps into Veyro, growing transactions by 62% and cutting payment failures by 70%.',
+      'How Dinesh Kumar worked on ML transaction categorisation with scikit-learn and XGBoost in Veyro, a unified fintech app with 62% more transactions.',
   },
 };
 
 const aura: Project = {
   slug: 'aura',
   name: 'Aura',
-  category: 'Fintech · Personal finance',
+  category: 'Fintech · Anomaly detection · Personal finance',
   accent: '#3D3BF3',
   accent2: '#F59E0B',
   cover: '/projects/aura-cover.webp',
@@ -1043,19 +1133,19 @@ const aura: Project = {
     'Aura results: user growth to 18.4K, transaction volume up across services, payment success from 78% to 96%, about 10-second transfers and instant gift card delivery.',
   secondaryTitle: 'Aura results & impact',
   outcome: 'Raised payment success from 78% to 96% with a faster, safer finance app',
-  summary: 'A personal finance app for banking, global transfers, bills and budgeting, with AI-powered insights.',
+  summary: 'A personal finance app for budgeting, savings goals and transfers, with anomaly alerts and AI budgeting suggestions.',
   cardMetric: { value: '96%', label: 'Payment success, up from 78%' },
-  tags: ['Fintech', 'Personal finance', 'AI insights'],
+  tags: ['Anomaly detection', 'scikit-learn', 'Fintech'],
   meta: {
-    role: 'Senior UI/UX & Product Designer',
+    role: 'AI/ML Product Engineer',
     duration: '[TODO: project duration]',
     team: '[TODO: team size]',
     platform: 'Mobile app',
-    stack: ['Figma', '[TODO: other tools]'],
+    stack: ['Python', 'Pandas', 'scikit-learn', 'Plotly'],
   },
   tldr: {
-    problem: 'Only 78% of payments succeeded, transfers were slow, and users had no clear picture of their money.',
-    did: 'I designed budgeting, savings goals and account management, plus AI budgeting suggestions and unusual-transaction alerts.',
+    problem: 'Only 78% of payments succeeded, transfers were slow, and users had no clear picture of their spending.',
+    did: 'I worked on unusual-transaction alerts (anomaly detection on spending patterns) and delivered AI budgeting suggestions and savings-goal tracking.',
     result: 'Payment success rose from 78% to 96%, failures fell 70% and active users grew 65%.',
     metrics: [
       { value: '96%', label: 'Payment success', detail: 'Up from 78%' },
@@ -1070,29 +1160,27 @@ const aura: Project = {
       'Users also relied on separate apps for different money tasks, so budgeting and saving meant piecing their finances together by hand.',
     ],
     affected: 'Everyday users sending money locally and abroad, paying bills and trying to stick to a budget.',
-    mattered: 'Every failed payment erodes trust. People won’t budget or save in an app they don’t trust with a transfer.',
+    mattered: 'Every failed payment or missed suspicious charge erodes trust. People won’t budget in an app they don’t trust with a transfer.',
     constraints: [
+      'Alerts had to catch unusual spending without flooding users with false alarms.',
       'Transfers had to be fast and safe, locally and globally.',
       '[TODO: compliance or technical constraints]',
     ],
   },
   role: {
     owned: [
-      'I designed budgeting, savings goals and account management.',
-      'I designed AI-powered budgeting suggestions, unusual-transaction alerts and clear financial reports for everyday users.',
-      'I designed the transfer flow, from choosing a recipient and country to reviewing and sending.',
+      'I worked on unusual-transaction alerts: anomaly detection on spending patterns with scikit-learn.',
+      'I delivered AI budgeting suggestions based on spending patterns, savings-goal tracking and spend-insight dashboards.',
+      'I reviewed alerts and edge cases with stakeholders to reduce false alerts before release.',
     ],
-    team: [
-      'Engineering and product teams built and shipped the app with me in Agile/Scrum sprints.',
-      '[TODO: team size]',
-    ],
+    team: [teamNote, '[TODO: team size]'],
   },
   process: [
-    { step: 'Research', text: 'I focused on the moments that decide trust: sending money, paying bills and checking balances.' },
-    { step: 'Define', text: 'I set two goals: every payment should succeed first time, and money should be easy to understand.' },
-    { step: 'Design', text: 'I designed a review-before-send transfer, a slide-to-send action and smart validation.' },
-    { step: 'Test', text: 'I refined the transfer and budgeting flows with product and engineering through sprint reviews.' },
-    { step: 'Launch', text: 'Aura launched as one app for banking, transfers, bills and insights.' },
+    { step: 'Research', text: 'I focused on the moments that decide trust: sending money, paying bills and spotting unusual charges.' },
+    { step: 'Define', text: 'I framed alerts as anomaly detection on spending patterns, with success criteria agreed with the product owner.' },
+    { step: 'Build', text: 'I built spending-pattern features in Pandas and the anomaly detector with scikit-learn.' },
+    { step: 'Test', text: 'I reviewed alerts and edge cases with stakeholders to reduce false alerts before release.' },
+    { step: 'Launch', text: 'Aura launched as one app for banking, transfers, bills, budgets and alerts.' },
   ],
   solution: {
     intro: 'Aura makes every payment feel certain, and every balance easy to read.',
@@ -1104,29 +1192,65 @@ const aura: Project = {
     ],
   },
   ai: {
-    kind: 'features',
-    intro: 'Aura’s AI watches the numbers so users don’t have to. I designed how its suggestions and alerts reach people.',
-    features: [
-      { icon: 'piggy-bank', title: 'AI budgeting suggestions', text: 'Personal suggestions that help users stick to budgets and savings goals.' },
-      { icon: 'alert-triangle', title: 'Unusual-transaction alerts', text: 'Users are alerted when a transaction looks out of the ordinary.' },
-      { icon: 'file-text', title: 'Clear financial reports', text: 'Reports written for everyday users, not accountants.' },
-    ],
+    kind: 'deep-dive',
+    title: 'AI/ML deep dive',
+    intro: 'Aura’s models watch spending so users don’t have to.',
+    data: {
+      text: 'Users’ transaction history, summarised into spending patterns with Pandas.',
+      facts: [
+        { label: 'Input', value: 'Transaction history' },
+        { label: 'Features', value: 'Spending patterns' },
+        { label: 'Volume', value: '[TODO: number of users or transactions]' },
+      ],
+    },
+    model: {
+      text: 'An anomaly-detection model built with scikit-learn learns normal spending patterns and flags transactions that fall outside them. The same patterns drive personalised budgeting suggestions.',
+      facts: [
+        { label: 'Task', value: 'Anomaly detection' },
+        { label: 'Library', value: 'scikit-learn' },
+        { label: 'Algorithm', value: '[TODO: e.g. Isolation Forest]' },
+      ],
+    },
+    evaluation: {
+      text: 'I reviewed alerts and edge cases with stakeholders to reduce false alerts before release.',
+      facts: [{ label: 'Metrics', value: '[TODO: precision / false-alert rate]' }],
+    },
+    serving: {
+      text: 'Alerts and budgeting suggestions reach the app through REST APIs, and spend dashboards are built with Plotly.',
+      facts: [
+        { label: 'API', value: 'REST APIs' },
+        { label: 'Dashboards', value: 'Plotly' },
+        { label: 'Client', value: 'Aura mobile app' },
+      ],
+    },
+    architecture: {
+      title: 'From spending patterns to alerts and budgets',
+      caption: 'Transactions become spending patterns; the model flags what doesn’t fit and suggests budgets that do.',
+      nodes: [
+        { title: 'Transactions', sub: 'History' },
+        { title: 'Pandas', sub: 'Spending patterns' },
+        { title: 'Anomaly model', sub: 'scikit-learn' },
+        { title: 'REST API', sub: 'Alerts & suggestions' },
+        { title: 'Aura app', sub: 'Alerts & budgets' },
+      ],
+      loop: 'Edge-case review',
+    },
   },
   decisions: [
+    {
+      title: 'Alerts tuned for precision',
+      why: 'If alerts cry wolf, users ignore them. I reviewed edge cases with stakeholders to cut false alerts before release.',
+      notChosen: 'Alerting on every large transaction.',
+    },
+    {
+      title: 'Learn normal spending instead of fixed rules',
+      why: 'What’s unusual for one user is normal for another. Anomaly detection adapts to spending patterns.',
+      notChosen: 'One fixed threshold for everyone.',
+    },
     {
       title: 'Review before you send',
       why: 'Showing the amount, fee, estimated arrival and source account before every transfer catches mistakes before they cost money.',
       notChosen: 'One-tap transfers with no review step.',
-    },
-    {
-      title: 'Slide to send',
-      why: 'A deliberate gesture prevents accidental transfers without adding another confirmation screen.',
-      notChosen: 'A plain button followed by a confirmation pop-up.',
-    },
-    {
-      title: 'Alerts that tell you what to do next',
-      why: 'An unusual-transaction alert is only useful if it’s clear and actionable, so alerts lead with the transaction and the next step.',
-      notChosen: 'Generic security notifications.',
     },
   ],
   beforeAfter: {
@@ -1170,19 +1294,16 @@ const aura: Project = {
     ],
   },
   learned: [
-    'In finance, reliability is the feature. Smart validation did more for growth than any new screen.',
-    'Friction can be good: a slide-to-send gesture adds a beat of intent exactly where mistakes are expensive.',
-    'Next, I’d measure how often users act on AI budgeting suggestions and tune them for usefulness, not volume.',
+    'In finance, reliability is the feature: a trusted alert is worth more than many noisy ones.',
+    'Cutting false alerts takes reviewing real edge cases with stakeholders, not just offline metrics.',
+    'Next, I’d measure how often users act on alerts and suggestions, and use that feedback to retrain the anomaly model.',
   ],
-  stack: ['Figma', '[TODO: other tools]'],
-  links: [
-    { label: 'Live app', href: '[TODO: Aura link]' },
-    { label: 'Figma', href: '[TODO: Figma link]' },
-  ],
+  stack: ['Python', 'Pandas', 'scikit-learn', 'Plotly'],
+  links: [{ label: 'Live app', href: '[TODO: Aura link]' }],
   seo: {
-    title: 'Aura: personal finance app case study',
+    title: 'Aura: anomaly detection case study',
     description:
-      'How Dinesh Kumar designed Aura’s personal finance app, raising payment success from 78% to 96% and cutting failures by 70%.',
+      'How Dinesh Kumar worked on anomaly-detection alerts and AI budgeting in Aura, a finance app that raised payment success from 78% to 96%.',
   },
 };
 
@@ -1192,14 +1313,14 @@ export const projects: Project[] = [monkify, loyaltri, novacare, veyro, aura];
 export const workSection = {
   eyebrow: 'Selected work',
   title: 'Five products. Real numbers.',
-  text: 'Case studies from recruitment, HR-tech, healthcare and fintech, each with the problem, my role and the measured impact.',
+  text: 'ML in production across recruitment, HR-tech, healthcare and fintech: the problem, the model, my role and the measured impact.',
 };
 
 export const seo = {
   home: {
     title: 'Dinesh Kumar · AI/ML Engineer',
     description:
-      'AI/ML engineer with 7+ years building B2B SaaS. ML models and LLM-powered features for HR-tech, recruitment, fintech and healthcare.',
+      'AI/ML engineer with 7+ years in B2B SaaS: NLP job matching, classification, anomaly detection and LLM features for HR-tech, recruitment, fintech and healthcare.',
   },
   ogImage: '/og-image.png',
 };

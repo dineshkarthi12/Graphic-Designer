@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowDown, ChevronDown, FileText } from 'lucide-react';
 import {
-  about, certifications, collaboration, contact, contactSection, education, experience, impactAtAGlance, person,
+  about, certifications, contact, contactSection, education, experience, impactAtAGlance, person,
   projects, seo, skills, workSection,
 } from '../data/content';
 import { clean, shown } from '../lib/text';
@@ -226,8 +226,8 @@ function Skills() {
         </h2>
         <RevealText as="p" className="section-title" text="Six orbits, one core." />
         <p className="section-lead">
-          From Python and classic ML to LLM apps, data pipelines and deployment, plus the product and UX craft that makes
-          models usable.
+          From Python and classic ML to LLM apps, NLP, data and deployment, plus the product craft that gets models into
+          users’ hands.
         </p>
         <div className="skills-grid">
           {skills.map((g, i) => (
@@ -253,9 +253,6 @@ function Skills() {
             </Reveal>
           ))}
         </div>
-        <p className="collab">
-          <strong>Collaboration:</strong> {collaboration.join(' · ')}
-        </p>
       </div>
     </section>
   );

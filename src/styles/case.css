@@ -555,6 +555,9 @@
   font-size: 13.5px;
   fill: var(--muted);
 }
+.arch-sub-sm {
+  font-size: 12px;
+}
 .arch-loop {
   font-size: 14px;
   font-weight: 600;
