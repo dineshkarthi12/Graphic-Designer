@@ -747,12 +747,15 @@ html.has-cursor textarea {
 }
 .hero-static {
   position: absolute;
-  right: max(-4vw, -60px);
-  top: 50%;
-  width: min(54vw, 760px);
-  transform: translateY(-50%);
+  inset: 0;
   z-index: 0;
   pointer-events: none;
+}
+.hero-static img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% 47%;
 }
 .hero-scroll {
   position: absolute;
@@ -1551,12 +1554,8 @@ html.has-cursor textarea {
     padding-top: 46vh;
     padding-bottom: 56px;
   }
-  .hero-static {
-    top: 92px;
-    left: 50%;
-    right: auto;
-    width: min(92vw, 420px);
-    transform: translateX(-50%);
+  .hero-static img {
+    object-position: 50% 27%;
   }
   .hero-scroll {
     display: none;

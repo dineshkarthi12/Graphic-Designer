@@ -107,7 +107,7 @@ export function Core({ lite = false, accent = '#4F46E5', accent2 = '#06B6D4' }: 
             iridescenceIOR={1.35}
             iridescenceThicknessRange={[120, 680]}
             transparent
-            opacity={0.55}
+            opacity={0.72}
             depthWrite={false}
           />
         ) : (

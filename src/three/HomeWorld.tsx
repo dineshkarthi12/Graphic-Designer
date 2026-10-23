@@ -1,8 +1,10 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Color, DoubleSide, Group, MathUtils, Mesh, ShaderMaterial, Vector3 } from 'three';
+import { Color, DoubleSide, Group, MathUtils, Mesh, PerspectiveCamera, ShaderMaterial, Vector3 } from 'three';
 import { loading } from '../lib/state';
 import { Core } from './Core';
+import { HeroBackdrop } from './HeroBackdrop';
+import { hero } from './heroLayout';
 import { Particles } from './Particles';
 import { Network } from './Network';
 import { Gallery } from './Gallery';
@@ -115,20 +117,31 @@ function CoreRig({ mobile, lite }: { mobile: boolean; lite: boolean }) {
   const scaled = useRef<Group>(null);
   const tilt = useRef<Group>(null);
   const halo = useRef(1);
+  const heroPos = useMemo(() => new Vector3(), []);
+  const ray = useMemo(() => new Vector3(), []);
 
   useFrame((state, dt) => {
     const t = story.t;
     if (!ref.current || !tilt.current || !scaled.current) return;
+
+    // In the hero, the core floats in the centre of the backdrop's main portal.
+    const cam = state.camera as PerspectiveCamera;
+    ray.set(hero.view.ndcX, hero.view.ndcY, 0.5).unproject(cam).sub(cam.position).normalize();
+    heroPos.copy(cam.position).addScaledVector(ray, -cam.position.z / ray.z);
+    const visH = 2 * Math.tan(MathUtils.degToRad(cam.fov / 2)) * cam.position.z;
+    const heroScale = (hero.view.portalFrac * visH * 0.48) / 2.3;
+
     if (mobile) {
       // After the hero, the core tucks into the top-right corner so it never sits behind body text.
       const k = smooth(0.15, 0.8, t);
-      ref.current.position.set(MathUtils.lerp(0, 1.25, k), MathUtils.lerp(1.25, 2.15, k), 0);
-      scaled.current.scale.setScalar(MathUtils.lerp(0.9, 0.38, k));
+      ref.current.position.lerpVectors(heroPos, TUCK, k);
+      scaled.current.scale.setScalar(MathUtils.lerp(heroScale, 0.38, k));
     } else {
-      if (t < 3.6) ref.current.position.lerpVectors(CORE_A, CORE_S, band(t, 1.3, 1.9, 2.6, 3.0));
+      if (t < 1) ref.current.position.lerpVectors(heroPos, CORE_A, smooth(0.2, 0.9, t));
+      else if (t < 3.6) ref.current.position.lerpVectors(CORE_A, CORE_S, band(t, 1.3, 1.9, 2.6, 3.0));
       else ref.current.position.copy(CORE_C);
       let s: number;
-      if (t < 1) s = MathUtils.lerp(1, 0.42, smooth(0.2, 0.9, t));
+      if (t < 1) s = MathUtils.lerp(heroScale, 0.42, smooth(0.2, 0.9, t));
       else if (t < 2) s = MathUtils.lerp(0.42, 0.8, smooth(1.3, 1.9, t));
       else if (t < 3.6) s = MathUtils.lerp(0.8, 0, smooth(2.5, 2.9, t));
       else s = MathUtils.lerp(0, 0.62, smooth(4.35, 4.9, t));
@@ -168,6 +181,7 @@ function DelayedNetwork() {
   return on ? <Network /> : null;
 }
 
+const TUCK = new Vector3(1.25, 2.15, 0);
 const tmpP = new Vector3();
 const tmpL = new Vector3();
 
@@ -214,6 +228,7 @@ export function HomeWorld({ mobile, lite }: { mobile: boolean; lite: boolean }) 
   return (
     <>
       <CameraRig mobile={mobile} />
+      <HeroBackdrop mobile={mobile} />
       {stage >= 1 && <CoreRig mobile={mobile} lite={lite} />}
       {!mobile && stage >= 3 && (
         <Suspense fallback={null}>

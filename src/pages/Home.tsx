@@ -82,14 +82,16 @@ function Hero({ revealed, staticHero }: { revealed: boolean; staticHero: boolean
   return (
     <section id="hero" className="hero" aria-label="Introduction">
       {staticHero && (
-        <img
-          className="hero-static"
-          src="/core-static.webp"
-          alt="3D render of an iridescent glass AI core"
-          width={1200}
-          height={1200}
-          {...{ fetchpriority: 'high' }}
-        />
+        <picture className="hero-static">
+          <source media="(max-width: 767px)" srcSet="/hero/static-mobile.webp" />
+          <img
+            src="/hero/static-desktop.webp"
+            alt="A glass AI core floating in a glowing portal, in a sky world of floating islands, waterfalls and light trails"
+            width={2880}
+            height={1800}
+            {...{ fetchpriority: 'high' }}
+          />
+        </picture>
       )}
       <div className="container">
         <div className="hero-inner">

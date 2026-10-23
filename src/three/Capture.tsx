@@ -4,14 +4,32 @@ import { useLocation } from 'react-router-dom';
 import { Core } from './Core';
 import { Particles } from './Particles';
 import { person } from '../data/content';
+import { Suspense } from 'react';
+import { HomeWorld } from './HomeWorld';
+import { Studio } from './Scene';
 
 /**
  * Dev-only pages used to render static assets with Playwright:
  *   /__capture/core  transparent render of the core (no-WebGL / reduced-motion hero image)
  *   /__capture/og    1200×630 Open Graph image
+ *   /__capture/hero  the animated hero at rest, at the current viewport size (still fallback)
  */
 export default function Capture() {
   const { pathname } = useLocation();
+  if (pathname.endsWith('/hero')) {
+    const mobile = window.innerWidth < 768;
+    return (
+      <div id="capture" style={{ position: 'fixed', inset: 0 }}>
+        <Canvas flat dpr={2} gl={{ preserveDrawingBuffer: true }} camera={{ fov: 35, near: 0.1, far: 120, position: [0, 0, 7.6] }}>
+          <color attach="background" args={['#F5F5F7']} />
+          <Studio />
+          <Suspense fallback={null}>
+            <HomeWorld mobile={mobile} lite={mobile} />
+          </Suspense>
+        </Canvas>
+      </div>
+    );
+  }
   const og = pathname.endsWith('/og');
   const scene = (
     <Canvas

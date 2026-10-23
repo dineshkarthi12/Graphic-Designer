@@ -9,7 +9,7 @@ import { AccentWorld } from './AccentWorld';
 import { Effects } from './Effects';
 
 /** Studio lighting built from light formers: no HDRI download needed. */
-function Studio() {
+export function Studio() {
   return (
     <Environment resolution={256} frames={1}>
       <color attach="background" args={['#DCDCE6']} />
@@ -27,10 +27,14 @@ function Studio() {
 
 /** Reports texture/font loading to the HTML loader, and readiness after the first rendered frames. */
 function Progress() {
-  const { progress, active } = useProgress();
-  useEffect(() => {
-    loading.set({ sceneProgress: active ? progress : Math.max(loading.get().sceneProgress, 90) });
-  }, [progress, active]);
+  // Subscribe outside React rendering, so loading updates never re-render another component mid-render.
+  useEffect(
+    () =>
+      useProgress.subscribe(({ progress, active }) => {
+        loading.set({ sceneProgress: active ? progress : Math.max(loading.get().sceneProgress, 90) });
+      }),
+    [],
+  );
   return null;
 }
 
