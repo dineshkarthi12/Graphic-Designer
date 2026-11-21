@@ -119,7 +119,7 @@ export function Navbar() {
         </nav>
         <div className="nav-right">
           <Magnetic>
-            <a className="btn btn-primary btn-sm" href={contact.resumePdf} download="Dinesh_Kumar_AI_ML_Engineer_Resume.pdf">
+            <a className="btn btn-primary btn-sm" href={contact.resumePdf} download={contact.resumeFileName}>
               <Download aria-hidden="true" />
               <span>
                 <span className="nav-resume-label">Download </span>Resume
@@ -178,7 +178,7 @@ export function Navbar() {
               ))}
             </ul>
             <div className="menu-bottom">
-              <a className="btn btn-primary" href={contact.resumePdf} download="Dinesh_Kumar_AI_ML_Engineer_Resume.pdf">
+              <a className="btn btn-primary" href={contact.resumePdf} download={contact.resumeFileName}>
                 <Download aria-hidden="true" /> Download resume
               </a>
               <div style={{ display: 'flex', gap: 8 }}>

@@ -1,4 +1,4 @@
-# Dinesh Kumar · AI/ML Engineer portfolio
+# Dinesh Kumar · UI/UX & Product Designer portfolio
 
 A cinematic, light-themed portfolio built with React and React Three Fiber. One persistent
 WebGL canvas sits behind the page; scrolling moves the camera through a storyboard:
@@ -7,7 +7,7 @@ WebGL canvas sits behind the page; scrolling moves the camera through a storyboa
 2. **Hero**: a sky world of portals and floating islands (an animated image), with the glass AI core floating in the main portal
 3. **About**: the core opens into a neural network with light pulses on its connections
 4. **Skills**: the nodes regroup into six skill orbits with 3D labels
-5. **Work**: the camera flies past the five project covers as curved glass panels
+5. **Work**: the camera flies past the project covers as curved glass panels
 6. **Experience**: a glowing timeline that lights up as you pass each role
 7. **Contact**: everything settles into a ring of light around the core
 
@@ -27,7 +27,7 @@ the real value and it appears automatically.
 | Impact strip, About, Skills, Experience | `impactAtAGlance`, `about`, `skills`, `experience` |
 | Case studies (order = home page order) | `projects` |
 | Project images (WebP, max 1600px) | `public/projects/` |
-| Resume PDF | `public/resume.pdf` |
+| Resume link (Google Drive) | `contact.resumeView`, `contact.resumePdf` |
 | Open Graph image, favicon | `public/og-image.png`, `public/favicon.svg` |
 
 ## Run it

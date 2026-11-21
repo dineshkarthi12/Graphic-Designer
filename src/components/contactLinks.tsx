@@ -27,7 +27,7 @@ export const contactLinks: ContactLink[] = [
     value: 'Download PDF',
     href: contact.resumePdf,
     icon: <Download aria-hidden="true" />,
-    download: 'Dinesh_Kumar_AI_ML_Engineer_Resume.pdf',
+    download: contact.resumeFileName,
   },
   { id: 'location', label: 'Location', value: person.location, href: contact.mapsUrl, icon: <MapPin aria-hidden="true" />, external: true },
 ];

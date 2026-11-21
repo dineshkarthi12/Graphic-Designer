@@ -1,5 +1,6 @@
 import { CatmullRomCurve3, MathUtils, Vector3 } from 'three';
 import { scroll } from '../lib/state';
+import { projects } from '../data/content';
 
 /**
  * The home storyboard as one number, t:
@@ -36,6 +37,8 @@ export const RING_R = 1.55;
 export const GALLERY_TOP = -8;
 export const GALLERY_STEP = 3.4;
 export const TIMELINE_TOP = -26.5;
+/** Index of the last project panel, where the gallery fly-past ends. */
+const LAST = projects.length - 1;
 
 type Key = { t: number; pos: [number, number, number]; look: [number, number, number] };
 
@@ -44,7 +47,7 @@ const DESKTOP_KEYS: Key[] = [
   { t: 1, pos: [0.85, 0.15, 4.7], look: [1.15, 0.0, 0] },
   { t: 2, pos: [0.2, 1.4, 8.6], look: [0.75, -0.1, 0] },
   { t: 3, pos: [0.35, GALLERY_TOP + 0.2, 6.2], look: [1.1, GALLERY_TOP, 0] },
-  { t: 3.8, pos: [0.35, GALLERY_TOP - GALLERY_STEP * 4 + 0.2, 6.2], look: [1.1, GALLERY_TOP - GALLERY_STEP * 4, 0] },
+  { t: 3.8, pos: [0.35, GALLERY_TOP - GALLERY_STEP * LAST + 0.2, 6.2], look: [1.1, GALLERY_TOP - GALLERY_STEP * LAST, 0] },
   { t: 4, pos: [0.3, TIMELINE_TOP + 0.4, 7.4], look: [1.0, TIMELINE_TOP - 0.6, 0] },
   { t: 4.8, pos: [0.3, TIMELINE_TOP - 9.6, 7.4], look: [1.0, TIMELINE_TOP - 10.4, 0] },
   { t: 5, pos: [0.2, CORE_C.y + 0.1, 8.2], look: [0.55, CORE_C.y, 0] },

@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, Clock, Download, ExternalLink, Mail, X as XIcon } from 'lucide-react';
-import { aiDesignPrinciple, contact, ctaCopy, projects, type Fact, type Project } from '../data/content';
+import { contact, ctaCopy, projects, type Fact, type Project } from '../data/content';
 import { clean, hasValue, readingMinutes, shown } from '../lib/text';
 import { useSeo } from '../lib/seo';
 import { rectOf, shared } from '../lib/sharedTransition';
@@ -144,13 +144,13 @@ function CaseStudyBody({ p, next }: { p: Project; next: Project }) {
         </Reveal>
       </Section>
 
-      {p.ai.kind === 'deep-dive' ? (
+      {p.ai?.kind === 'deep-dive' && (
         <Section num={num()} title={p.ai.title} id="ml" lead={p.ai.intro}>
           <DeepDive p={p} />
-          <p className="ai-principle">{aiDesignPrinciple}</p>
         </Section>
-      ) : (
-        <Section num={num()} title="The AI features" id="ai" lead={p.ai.intro}>
+      )}
+      {p.ai?.kind === 'features' && (
+        <Section num={num()} title={p.ai.title ?? 'The AI features'} id="ai" lead={p.ai.intro}>
           <div className="feature-grid ai-grid">
             {p.ai.features.map((f, i) => (
               <Reveal key={f.title} delay={i * 0.06} className="feature glass is-ai">
@@ -162,7 +162,6 @@ function CaseStudyBody({ p, next }: { p: Project; next: Project }) {
               </Reveal>
             ))}
           </div>
-          <p className="ai-principle">{aiDesignPrinciple}</p>
         </Section>
       )}
 
@@ -189,9 +188,11 @@ function CaseStudyBody({ p, next }: { p: Project; next: Project }) {
       </Section>
 
       <Section num={num()} title="Before → After" id="before-after">
-        <Reveal className="case-figure">
-          <ZoomImage src={p.secondary} alt={p.secondaryAlt} width={1600} height={p.secondary.includes('loyaltri') ? 1067 : 900} />
-        </Reveal>
+        {p.secondary && (
+          <Reveal className="case-figure">
+            <ZoomImage src={p.secondary} alt={p.secondaryAlt ?? ''} width={1600} height={p.secondary.includes('loyaltri') ? 1067 : 900} />
+          </Reveal>
+        )}
         <div className="ba">
           <Reveal className="ba-col is-before">
             <span className="ba-tag">Before</span>
@@ -437,7 +438,7 @@ function Facts({ facts }: { facts: Fact[] }) {
 }
 
 function DeepDive({ p }: { p: Project }) {
-  if (p.ai.kind !== 'deep-dive') return null;
+  if (p.ai?.kind !== 'deep-dive') return null;
   const ai = p.ai;
   const blocks = [
     { id: 'data', title: ai.data.title ?? 'Data', icon: 'database' as const, text: ai.data.text, facts: ai.data.facts },
@@ -545,7 +546,7 @@ function CaseCTA() {
               Copy email
             </button>
             <Magnetic>
-              <a className="btn btn-ghost" href={contact.resumePdf} download="Dinesh_Kumar_AI_ML_Engineer_Resume.pdf">
+              <a className="btn btn-ghost" href={contact.resumePdf} download={contact.resumeFileName}>
                 <Download aria-hidden="true" /> Download resume
               </a>
             </Magnetic>

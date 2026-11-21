@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { person } from '../data/content';
 import { loading } from '../lib/state';
 import { useStore } from '../lib/useStore';
 import { lockScroll } from '../lib/smoothScroll';
@@ -88,7 +89,9 @@ export function Loader({ waitForScene, quick }: { waitForScene: boolean; quick: 
               transition={{ duration: 0.2, ease: 'linear' }}
             />
           </svg>
-          <span className="loader-label">Dinesh Kumar · AI/ML Engineer</span>
+          <span className="loader-label">
+            {person.name} · {person.role}
+          </span>
           <span className="loader-count" aria-hidden="true">
             {String(Math.floor(shown)).padStart(3, '0')}
           </span>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Copy, Send } from 'lucide-react';
-import { contact } from '../data/content';
+import { contact, contactSection } from '../data/content';
 import { showToast } from '../lib/toast';
 import { contactLinks, linkProps } from './contactLinks';
 import { Reveal } from './Reveal';
@@ -79,7 +79,7 @@ export function ContactForm() {
         <input
           id="cf-subject"
           name="subject"
-          placeholder="AI/ML engineer role at …"
+          placeholder={contactSection.subjectPlaceholder}
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />

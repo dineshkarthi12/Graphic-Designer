@@ -93,7 +93,7 @@ export default function Capture() {
           <span className="grad-text">{person.role}</span>
         </p>
         <p style={{ marginTop: 18, fontSize: 21, color: '#2E2E3C', fontFamily: 'var(--font-body)', maxWidth: 520, lineHeight: 1.45 }}>
-          ML models and LLM-powered features for HR-tech, recruitment, fintech and healthcare.
+          Calm interfaces for complicated products in SaaS, fintech, healthcare and AI.
         </p>
       </div>
     </div>

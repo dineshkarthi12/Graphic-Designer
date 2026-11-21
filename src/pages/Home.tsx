@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowDown, ChevronDown, FileText } from 'lucide-react';
 import {
-  about, certifications, contact, contactSection, education, experience, impactAtAGlance, person,
-  projects, seo, skills, workSection,
+  about, certifications, contact, contactSection, education, experience, experienceSection, impactAtAGlance, person,
+  projects, seo, skills, skillsSection, workSection,
 } from '../data/content';
 import { clean, shown } from '../lib/text';
 import { loading, scroll } from '../lib/state';
@@ -86,7 +86,7 @@ function Hero({ revealed, staticHero }: { revealed: boolean; staticHero: boolean
           <source media="(max-width: 767px)" srcSet="/hero/static-mobile.webp" />
           <img
             src="/hero/static-desktop.webp"
-            alt="A glass AI core floating in a glowing portal, in a sky world of floating islands, waterfalls and light trails"
+            alt="A glass core floating in a glowing portal, in a sky world of floating islands, waterfalls and light trails"
             width={2880}
             height={1800}
             {...{ fetchpriority: 'high' }}
@@ -226,11 +226,8 @@ function Skills() {
         <h2 id="skills-title" className="sr-only">
           Skills
         </h2>
-        <RevealText as="p" className="section-title" text="Six orbits, one core." />
-        <p className="section-lead">
-          From Python and classic ML to LLM apps, NLP, data and deployment, plus the product craft that gets models into
-          users’ hands.
-        </p>
+        <RevealText as="p" className="section-title" text={skillsSection.title} />
+        <p className="section-lead">{skillsSection.text}</p>
         <div className="skills-grid">
           {skills.map((g, i) => (
             <Reveal key={g.id} delay={(i % 2) * 0.08} className="skill-card glass">
@@ -284,7 +281,7 @@ function Experience() {
     <section id="experience" className="section" aria-labelledby="exp-title">
       <div className="container">
         <span className="eyebrow">Experience</span>
-        <RevealText as="h2" id="exp-title" className="section-title" text="7+ years of shipping." />
+        <RevealText as="h2" id="exp-title" className="section-title" text={experienceSection.title} />
         <ol className="timeline">
           {experience.map((r) => (
             <Reveal as="li" key={r.company} className="role-card glass">
