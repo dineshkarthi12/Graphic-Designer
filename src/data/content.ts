@@ -124,9 +124,9 @@ export const contact = {
   whatsapp: 'https://wa.me/919952129182',
   linkedin: 'https://www.linkedin.com/in/dinesh-karthi-9224ba205',
   github: 'https://github.com/dineshkarthi12',
-  resumeView: 'https://drive.google.com/file/d/12IQA5aOfOivI6v2IAtpou71HtvutawIL/view?usp=drivesdk',
+  resumeView: 'https://drive.google.com/file/d/1cnoayb4CtgSWaCXqYtucBaBv-2D59JkC/view?usp=drivesdk',
   /** Direct download of the same Google Drive file. */
-  resumePdf: 'https://drive.google.com/uc?export=download&id=12IQA5aOfOivI6v2IAtpou71HtvutawIL',
+  resumePdf: 'https://drive.google.com/uc?export=download&id=1cnoayb4CtgSWaCXqYtucBaBv-2D59JkC',
   resumeFileName: 'Dinesh_Kumar_UI_UX_Product_Designer_Resume.pdf',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Chennai%2C%20India',
 };
